@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head"></head>
+
+<body>
+	<nav th:replace="common/navbar"></nav>
+	<div class="py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div class="card text-white p-5 bg-primary">
+						<div class="card-body">
+							<h1 class="mb-4" th:text="#{login.title}"></h1>
+							<form  role="form" name="form"
+				th:action="@{/login}" action="/login" method="post">
+								<div class="form-group">
+									<label  th:text="#{username}"></label> <input type="text"
+										class="form-control"  name="username" placeholder="Enter email">
+								</div>
+								<div class="form-group">
+									<label  th:text="#{password}"></label> <input type="password"
+										class="form-control"  name="password" placeholder="Password">
+								</div>
+								<button type="submit" class="btn btn-secondary"  id="login" th:text="#{login}"></button>
+								<input type="button" id="Sign_up"
+					onclick="gotoSignupPage()" class="btn btn-primary"  th:value="#{signUp}"/>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 
+	<div class="container">
+		<div class="starter-template">
+			<p th:if="${param.logout}" class="bg-warning">已注销</p>
+			<p th:if="${param.error}" class="bg-danger">有错误，请重试</p>
+			<h2>使用账号密码登录</h2>
+			<form class="form-signin" role="form" name="form"
+				th:action="@{/login}" action="/login" method="post">
+				<div class="form-group">
+					<label for="username">账号</label> <input type="text"
+						class="form-control" name="username" value="" placeholder="账号" />
+				</div>
+				<div class="form-group">
+					<label for="password">密码</label> <input type="password"
+						class="form-control" name="password" placeholder="密码" />
+				</div>
+				<input type="submit" id="login" value="Login"
+					class="btn btn-primary" /> <input type="button" id="Sign_up"
+					value="注册" onclick="gotoSignupPage()" class="btn btn-primary" />
+			</form>
+		</div>
+	</div>
+	 -->
+	 <div th:replace="common/foot"></div>
+</body>
+<script type="text/javascript" th:src="@{/js/home.js}"></script>
+</html>

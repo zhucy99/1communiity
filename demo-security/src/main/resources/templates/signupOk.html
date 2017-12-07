@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head"></head>
+<body>
+	<nav th:replace="common/navbar"></nav>
+	<div class="container">
+		<div class="starter-template">
+			<p th:if="${param.logout}" class="bg-warning">已注销</p>
+			<p th:if="${param.error}" class="bg-danger">有错误，请重试</p>
+			<h2>您已注册成功，欢迎加入虚拟社区</h2>
+			<h2>我们已向您发送验证邮件，点击邮件里的链接便可以在社区遨游啦!</h2>
+			
+		</div>
+	</div>
+	<div th:replace="common/foot"></div>
+</body>
+
+</html>
