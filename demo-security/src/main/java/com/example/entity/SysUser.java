@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,7 +31,18 @@ public class SysUser implements UserDetails {
     private String telephone;
     private String mail;
     
-    public String getAdress() {
+    @OneToMany(mappedBy="author",cascade = {CascadeType.REFRESH},fetch = FetchType.LAZY)
+    private List<Announce> announces;
+    
+    public List<Announce> getAnnounces() {
+		return announces;
+	}
+
+	public void setAnnounces(List<Announce> announces) {
+		this.announces = announces;
+	}
+
+	public String getAdress() {
 		return adress;
 	}
 

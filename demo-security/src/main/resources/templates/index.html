@@ -21,7 +21,7 @@
 			<div class="row">
 				<div class="col-md-3 text-white">
 					<img class="img-fluid d-block mx-auto mb-5" 
-						th:src="@{img/dragon.png}">
+						th:src="@{/img/dragon.png}">
 				</div>
 				<div class="col-md-9 text-white align-self-center">
 					<h1 class="display-3 mb-4" th:text="#{index.title}">Image and gradient intro</h1>
@@ -29,9 +29,8 @@
 						Get a fluid web page working on all devices with the Bootstrap 4
 						grid system.&nbsp; <br>
 					</p>
-					<a href="#" class="btn btn-lg mx-1 btn-secondary" th:text="#{index.share}">A claim here</a>
-					<a href="#" class="btn btn-lg btn-primary mx-1" th:text="#{index.secondHand}">Your call to
-						action</a>
+					<a href="#" class="btn btn-lg mx-1 btn-secondary" th:text="#{index.share}"></a>
+					<a href="#" class="btn btn-lg btn-primary mx-1" th:text="#{index.secondHand}" th:href="@{/announce/secondHand}"></a>
 				</div>
 			</div>
 		</div>

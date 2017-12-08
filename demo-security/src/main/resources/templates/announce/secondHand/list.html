@@ -1,0 +1,132 @@
+<div id="announceList">
+	<div class="row">
+		<div class="col-md-12">
+			<span class="lead w-25">二手交易</span>
+			<button type="submit" class="btn btn-primary" style="float: right" onclick="showAddSecondHand()">我要发布+</button>
+			<span style="float: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<button type="submit" class="btn btn-primary" style="float: right"
+				onclick="find()">Search</button>
+			<input class="form-control mr-2" type="text" placeholder="User Name"
+				style="float: right" v-model="search">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4"
+				src="http://img1.gtimg.com/tech/pics/hv1/223/26/1998/129926803.jpg">
+			<h5>
+				<b>Features#2: strawberries</b>
+			</h5>
+			<p class="mt-1">Integrate it in your toolset. Use Pingendo
+				alongside your favourite code editor, Git client, etc.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4"
+				src="http://img1.gtimg.com/tech/pics/hv1/223/26/1998/129926803.jpg">
+			<h5>
+				<b>Features#2: strawberries</b>
+			</h5>
+			<p class="mt-1">Integrate it in your toolset. Use Pingendo
+				alongside your favourite code editor, Git client, etc.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4"
+				src="http://n.sinaimg.cn/mn/20171011/5xNB-fymrcmn0317442.jpg">
+			<h5>
+				<b>Features#3: blue palette</b>
+			</h5>
+			<p class="mt-1">Just quality vanilla Bootstrap 4 code. No messy
+				dependencies. For nerds peace of mind.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4"
+				src="http://file01.up71.com/File/CorpProductImages/2013/12/14/0_szpsmypf_8271_20131214173542.jpg">
+			<h5>
+				<b>Features#3: blue palette</b>
+			</h5>
+			<p class="mt-1">Just quality vanilla Bootstrap 4 code. No messy
+				dependencies. For nerds peace of mind.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4"
+				src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+			<h5>
+				<b>Features#2: strawberries</b>
+			</h5>
+			<p class="mt-1">Integrate it in your toolset. Use Pingendo
+				alongside your favourite code editor, Git client, etc.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4"
+				src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+			<h5>
+				<b>Features#2: strawberries</b>
+			</h5>
+			<p class="mt-1">Integrate it in your toolset. Use Pingendo
+				alongside your favourite code editor, Git client, etc.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4 img-thumbnail"
+				src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
+			<h5>
+				<b>Features#3: blue palette</b>
+			</h5>
+			<p class="mt-1">Just quality vanilla Bootstrap 4 code. No messy
+				dependencies. For nerds peace of mind.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4 img-thumbnail"
+				src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
+			<h5>
+				<b>Features#3: blue palette</b>
+			</h5>
+			<p class="mt-1">Just quality vanilla Bootstrap 4 code. No messy
+				dependencies. For nerds peace of mind.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4"
+				src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+			<h5>
+				<b>Features#2: strawberries</b>
+			</h5>
+			<p class="mt-1">Integrate it in your toolset. Use Pingendo
+				alongside your favourite code editor, Git client, etc.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4"
+				src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+			<h5>
+				<b>Features#2: strawberries</b>
+			</h5>
+			<p class="mt-1">Integrate it in your toolset. Use Pingendo
+				alongside your favourite code editor, Git client, etc.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4 img-thumbnail"
+				src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
+			<h5>
+				<b>Features#3: blue palette</b>
+			</h5>
+			<p class="mt-1">Just quality vanilla Bootstrap 4 code. No messy
+				dependencies. For nerds peace of mind.</p>
+		</div>
+		<div class="col-md-3 my-3">
+			<img class="img-fluid d-block mb-4 img-thumbnail"
+				src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
+			<h5>
+				<b>Features#3: blue palette</b>
+			</h5>
+			<p class="mt-1">Just quality vanilla Bootstrap 4 code. No messy
+				dependencies. For nerds peace of mind.</p>
+		</div>
+	</div>
+	<div th:replace="common/pageBar"></div>
+</div>
+
+<script type="text/javascript"
+		th:src="@{/js/announce.js}"></script>

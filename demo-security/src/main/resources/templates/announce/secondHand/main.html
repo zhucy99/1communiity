@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="common/head"></head>
+
+<style type="text/css">
+.py-5.gradient-overlay {
+	background-image: url('/img/index.jpg');
+}
+
+.card-header.bg-primary.text-white.text-center.secondHand {
+	background-color: rgba(255, 138, 0, 0.79) !important;
+}
+
+.card-header.bg-primary.text-white.text-center.question {
+	background-color: rgb(84, 228, 87) !important;
+}
+input.form-control.mr-2 {
+    width: initial;
+}
+</style>
+<body>
+	<nav th:replace="common/navbar"></nav>
+
+	<div class="bg-light text-dark py-3">
+		<div class="container p-2 ml-auto">
+			
+			<div th:replace="/announce/secondHand/list"></div>
+			<div th:replace="/announce/secondHand/add"></div>
+		</div>
+	</div>
+	<div th:replace="common/foot"></div>
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" th:src="@{/js/home.js}"></script>
+
+</body>
+
+</html>
