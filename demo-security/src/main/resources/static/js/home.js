@@ -25,9 +25,7 @@ function signup(){
 	
 }
 
-function logout(){
-	$( "#logoutForm" ).submit();
-}
+
 
 
 

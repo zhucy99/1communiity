@@ -24,11 +24,11 @@
 				th:action="@{/login}" action="/login" method="post">
 								<div class="form-group">
 									<label  th:text="#{username}"></label> <input type="text"
-										class="form-control"  name="username" placeholder="Enter email">
+										class="form-control"  name="username" th:placeholder="#{username}" required>
 								</div>
 								<div class="form-group">
 									<label  th:text="#{password}"></label> <input type="password"
-										class="form-control"  name="password" placeholder="Password">
+										class="form-control"  name="password" th:placeholder="#{password}"  required>
 								</div>
 								<button type="submit" class="btn btn-secondary"  id="login" th:text="#{login}"></button>
 								<input type="button" id="Sign_up"

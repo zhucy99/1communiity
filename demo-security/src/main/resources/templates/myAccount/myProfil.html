@@ -1,4 +1,3 @@
-
 <style type="text/css">
 .col-md-12 {
     padding-bottom: 5px;
@@ -11,17 +10,16 @@
     height: 2.4rem;
 }
 </style>
-
-<div class="py-0" id="userManage" name="content">
+<div class="py-0" id="myProfil" name="content">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<span class="lead w-25">User List </span>
+				<span class="lead w-25">Role List </span>
 				<button type="submit" class="btn btn-primary" style="float: right">+</button>
 				<span style="float: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<button type="submit" class="btn btn-primary" style="float: right"  onclick="find()" >Search</button>
-				<input class=" mr-2 w-25 ml-auto form-control" type="text"
-					placeholder="User Name" style="float: right"  v-model="search" >
+				<button type="submit" class="btn btn-primary form-control" style="float: right">Search</button>
+				<input class=" mr-2 w-25 ml-auto" type="text"
+					placeholder="User Name" style="float: right">
 			</div>
 		</div>
 		<div class="row">
@@ -30,23 +28,29 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>User name</th>
+							<th>Role name</th>
 							<th>Adress</th>
-							<th>E-Mail</th>
 							<th>Telephone</th>
+							<th>Mail</th>
 							<th>Traitement</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="user in datas.content">
-							<td>{{user.id}}</td>
-							<td>{{user.username}}</td>
-							<td>{{user.adress}}</td>
-							<td>{{user.mail}}</td>
-							<td>{{user.telephone}}</td>
-							<td><a v-bind:href="'javascript:deleteUser('+user.id+')'">Delete</a>/Modife/Detail</td>
+						<tr>
+							<td>1</td>
+							<td>Mark</td>
+							<td>Otto</td>
 						</tr>
-
+						<tr>
+							<td>2</td>
+							<td>Jacob</td>
+							<td>Thornton</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>Larry</td>
+							<td>the Bird</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

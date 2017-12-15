@@ -26,19 +26,20 @@ span.nav-link {
 					class="nav-link" th:href="@{/signup}"></a></li>
 				<li class="nav-item" sec:authorize="hasRole('ROLE_USER')"><a
 					class="nav-link" th:text="#{navbar.myCircle}" th:href="@{http://www.google.com}"></a></li>
-				<!-- 
-				<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a
-					class="nav-link" th:href="@{/user/manage}">Manage Users</a></li>
-				<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a
-					class="nav-link" th:href="@{/role/manage}">Manage Roles</a></li>
-					 -->
+				
 
 			</ul>
 			<span class="nav-link"
 				th:if="${#httpServletRequest.getUserPrincipal()} != null"
 				th:text="#{navbar.welcome}+'&nbsp;&nbsp;'+${#httpServletRequest.getUserPrincipal()?.getName()}"></span>
+				
+			<a sec:authorize="hasRole('ROLE_USER')" class="nav-link" th:text="#{navbar.myAccount}"
+				th:href="@{/myAccount}"></a>
+				
 			<a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" th:text="#{navbar.admin}"
 				th:href="@{/admin}"></a>
+				
+			
 
 			<form id="logoutForm" class="form-inline m-0"
 				sec:authorize="hasRole('ROLE_USER')" th:action="@{/logout}"
@@ -49,5 +50,5 @@ span.nav-link {
 	</div>
 </nav>
 
-<script type="text/javascript" th:src="@{../js/plugins/vue.min.js}"></script>
-<script type="text/javascript" th:src="@{../js/common.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/vue.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>

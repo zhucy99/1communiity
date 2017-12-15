@@ -9,6 +9,7 @@ function find(page) {
 		um.datas = data;
 		pager.datas = data;
 		pager.currentPage = page;
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	});
 }
 

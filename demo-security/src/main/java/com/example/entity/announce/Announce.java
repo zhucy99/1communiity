@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.entity.announce;
 
 import java.util.Date;
 import java.util.List;
@@ -7,11 +7,20 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.example.entity.SysUser;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Announce {
 	
 	public static final int TYPE_SECONDHAND = 1;
@@ -28,16 +37,23 @@ public class Announce {
 	private Long id;
 	private String title;
 	private String description;
-	// 用mqppedBy,避免中间表的产生
-	@OneToMany(mappedBy = "announce", cascade = { CascadeType.REFRESH })
-	private List<Picture> pictures;
+	
 
 	private int type;
+	@Transient
+	private String typeStr;
+	
 	private int status;
+	@Transient
+	private String statusStr;
 
 	@ManyToOne
+	@JsonBackReference// 避免json 的无限循环
 	private SysUser author;
 	private Date createTime;
+	
+	@Transient
+	private String createTimeStr;
 	private Date lastEditTime;
 
 	public int getStatus() {
@@ -103,5 +119,31 @@ public class Announce {
 	public void setType(int type) {
 		this.type = type;
 	}
+
+	public String getTypeStr() {
+		return typeStr;
+	}
+
+	public void setTypeStr(String typeStr) {
+		this.typeStr = typeStr;
+	}
+
+	public String getStatusStr() {
+		return statusStr;
+	}
+
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
+	}
+
+	public String getCreateTimeStr() {
+		return createTimeStr;
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
+
+	
 
 }

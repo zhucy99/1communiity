@@ -16,6 +16,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.example.entity.announce.Announce;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class SysUser implements UserDetails {
     /**
@@ -32,6 +35,7 @@ public class SysUser implements UserDetails {
     private String mail;
     
     @OneToMany(mappedBy="author",cascade = {CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @JsonManagedReference// 避免json 的无限循环
     private List<Announce> announces;
     
     public List<Announce> getAnnounces() {
