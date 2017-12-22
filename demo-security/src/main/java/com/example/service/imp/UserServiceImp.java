@@ -26,6 +26,7 @@ import com.example.repository.SysRoleRepository;
 import com.example.repository.SysUserRepository;
 import com.example.service.RoleService;
 import com.example.service.UserService;
+import com.example.util.Others;
 
 @Service
 public class UserServiceImp implements UserDetailsService, UserService {
@@ -64,11 +65,13 @@ public class UserServiceImp implements UserDetailsService, UserService {
 				if (model.getUsername()!=null) {
 					list.add(cb.like(root.get("username").as(String.class), "%" + model.getUsername() + "%"));
 				}
+				
+				
+				if (model.getMail() != null) {
+					list.add(cb.equal(root.get("mail").as(String.class), model.getMail()));
+				}
 
 				/*
-				if (model.getGender() != null) {
-					list.add(cb.equal(root.get("gender").as(GenderType.class), model.getGender()));
-				}
 
 				if (StringUtils.isNotBlank(model.getTelPhone())) {
 					list.add(cb.like(root.get("telPhone").as(String.class), "%" + model.getTelPhone() + "%"));
@@ -113,12 +116,44 @@ public class UserServiceImp implements UserDetailsService, UserService {
 			}else {
 				roles.add(role);
 			}
+			user.setPassword(Others.MD5Encode(user.getPassword()));
 			this.userRepository.save(user);
 			return 1;
 		}else {
 			return -1;
 		}
 		
+	}
+
+	@Override
+	public boolean isMailOrUsernameNotUsed(SysUser user) {
+		
+		List<SysUser> result = userRepository.findAll(new Specification<SysUser>() {
+			
+			@Override
+			public Predicate toPredicate(Root<SysUser> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				List<Predicate> list = new ArrayList<Predicate>();
+
+				if (user.getUsername()!=null) {
+					list.add(cb.like(root.get("username").as(String.class), user.getUsername()));
+				}
+				
+				
+				if (user.getMail() != null) {
+					list.add(cb.equal(root.get("mail").as(String.class), user.getMail()));
+				}
+
+				Predicate[] p = new Predicate[list.size()];
+				return cb.and(list.toArray(p));
+			}
+
+		});
+		
+		if(result.size()==0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

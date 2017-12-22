@@ -1,0 +1,100 @@
+<style type="text/css">
+div#description {
+	background-color: rgba(0, 0, 0, 0.05);
+	padding: 15px;
+	min-height: 400px;
+}
+
+#detail>div:nth-child(3) {
+	background-color: rgba(0, 123, 255, 0.08);
+}
+
+#carousel1>div {
+	height: 580px;
+}
+
+#contact>span>img {
+	width: 20px;
+}
+
+#list>div {
+	margin-top: 0rem !important;
+	margin-bottom: 0rem !important;
+}
+
+.right {
+	display: inline;
+}
+
+div.comment {
+	border: 1px;
+	border-style: solid;
+	border-color: #e9ecef;
+	margin-top: 20px;
+}
+</style>
+
+<div id="detail" style="display: none">
+	<div class="row">
+		<div class="col-md-12">
+			<input type="hidden"
+				th:value="${#httpServletRequest.getUserPrincipal()?.getName()}"
+				id="username"> <span class="lead w-25"
+				th:text="#{share}+'/'+#{announceDetail}"></span>
+			<button v-if="editable" type="submit" class="btn btn-primary"
+				style="float: right" onclick="addAnnounceSubmit()"
+				th:text="#{offShelves}"></button>
+			<span style="float: right">&nbsp;&nbsp;</span>
+			<button v-if="editable" type="submit" class="btn btn-primary"
+				style="float: right" onclick="addAnnounceSubmit()" th:text="#{edit}"></button>
+			<span style="float: right">&nbsp;&nbsp;</span>
+			<button type="submit" class="btn btn-primary" style="float: right"
+				onclick="showListAnnounce()" th:text="#{return}"></button>
+
+		</div>
+	</div>
+	<hr>
+
+
+	<div class="row">
+		<div class="align-self-center pl-5 pr-5 pt-5 pb-3 col-md-12">
+			<h1 class="mb-4">{{datas.title}}</h1>
+			<hr>
+			<p class="mb-5" v-html="datas.description"></p>
+
+			<hr>
+			<div id="contact" class="right col-md-3" v-if="datas.author!=null">
+				<span class="mb-5"><label th:text="#{publisher}"></label>:{{datas.author.username}}</span>&nbsp;|&nbsp;
+				<span class="mb-5"><label th:text="#{publishTime}"></label>:{{datas.createTime}}</span>
+			</div>
+
+		</div>
+
+	</div>
+	<template v-for="comment in comments">
+	<div class="row">
+		<div class="align-self-center pl-5 pr-5 pt-3 pb-3 col-md-12 comment">
+			<p class="mb-5" v-html="comment.content"></p>
+			<hr>
+			<div id="contact" class="right col-md-3" v-if="datas.author!=null">
+				<span class="mb-5"><label th:text="#{publisher}"></label>:{{comment.author.name}}</span>&nbsp;|&nbsp;
+				<span class="mb-5"><label th:text="#{publishTime}"></label>:{{comment.createTime}}</span>
+			</div>
+		</div>
+	</div>
+	</template>
+
+	<div class="row">
+		<div class="align-self-center p-3 col-md-12 comment">
+			<input type="hidden" :value="datas.id" id="comment_announce_id" />
+			<textarea class="ckeditor" cols="80" rows="20" id="comment_content"
+				v-form-ctrl required></textarea>
+			<button class="btn mt-2 btn-primary" style="float: right"
+				onclick="addComment()" th:text="#{publishComment}"></button>
+		</div>
+	</div>
+
+</div>
+<script type="text/javascript" th:src="@{/js/announce/share.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/plugins/ckeditor/ckeditor.js}"></script>

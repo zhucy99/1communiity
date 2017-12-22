@@ -33,8 +33,8 @@ public class SecondHandController {
 
 	@RequestMapping(value = "/add", method = { RequestMethod.POST })
 	public String add(@ModelAttribute("secondHand") SecondHand secondHand,@RequestParam("file") MultipartFile[] files) {
-		SysUser user = (SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		this.secondHandService.add(secondHand,user,files);
+		//SysUser user = (SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		this.secondHandService.add(secondHand,files);
 		return "redirect:/secondHand";
 	}
 	

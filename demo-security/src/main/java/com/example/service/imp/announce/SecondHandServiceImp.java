@@ -36,6 +36,7 @@ import com.example.repository.SysRoleRepository;
 import com.example.repository.announce.SecondHandRepository;
 import com.example.service.RoleService;
 import com.example.service.announce.SecondHandService;
+import com.example.util.Others;
 
 @Service
 public class SecondHandServiceImp implements SecondHandService {
@@ -77,7 +78,9 @@ public class SecondHandServiceImp implements SecondHandService {
 	}
 
 	@Override
-	public Page<SecondHand> add(SecondHand secondHand, SysUser user, MultipartFile[] files) {
+	public Page<SecondHand> add(SecondHand secondHand,MultipartFile[] files) {
+		
+		SysUser user = Others.getCurrentUser();
 		
 		List<Picture> pics = null;
 		

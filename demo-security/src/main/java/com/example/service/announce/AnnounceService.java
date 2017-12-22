@@ -1,6 +1,8 @@
 package com.example.service.announce;
 
 import org.springframework.data.domain.Page;
+
+import com.example.entity.Comment;
 import com.example.entity.announce.Announce;
 
 public interface AnnounceService{
@@ -9,4 +11,5 @@ public interface AnnounceService{
 	Page<Announce> delete(Announce model,int page, int size);
 	public Announce findByName(String name);
 	public Announce findById(Long id);
+	public Page<Comment> addComment(Comment comment);
 }

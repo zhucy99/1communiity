@@ -1,24 +1,3 @@
-function addSecondHandSubmit() {
-	$("#addSecondHandForm").submit();
-}
-function showAddSecondHand() {
-	hideAll();
-	$("#add").css("display", "block");
-}
-function showListSecondHand() {
-	hideAll();
-	$("#listPage").css("display", "block");
-}
-function showDetailSecondHand() {
-	hideAll();
-	$("#detail").css("display", "block");
-}
-function hideAll(){
-	$("#add").css("display", "none");
-	$("#listPage").css("display", "none");
-	$("#detail").css("display", "none");
-}
-
 function find(page) {
 	if (page == null) {
 		page = 1;
@@ -38,9 +17,16 @@ function showDetail(id) {
 		id : id
 	}, function(data) {
 		detail.datas = data;
+		if(data.author.username==$("#username").val()){
+			detail.editable=true;
+		}
 		$("#description").html(detail.datas.description);
-		showDetailSecondHand();
+		showDetailAnnounce();
 	});
+}
+
+function showContact() {
+	$("#contact").css("display","block");
 }
 
 var announcesList = new Vue({
@@ -55,8 +41,25 @@ var announcesList = new Vue({
 var detail = new Vue({
 	el : '#detail',
 	data : {
-		datas : ''
+		datas : '',
+		editable: false
 	}
 });
 
-find();
+
+
+$("#file").change(function(){
+	console.log(this.files);
+	
+	for(var i = 0;i<this.files.length;i++){
+		console.log(i);
+		let imgFile = this.files[i];
+		let fr = new FileReader();
+		fr.onload = function() {
+			$("img").attr("src", fr.result);
+	    };
+	    
+	    fr.readAsDataURL(imgFile);
+	}
+	
+});

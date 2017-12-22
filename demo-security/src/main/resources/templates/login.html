@@ -5,6 +5,13 @@
 .card.text-white.p-5.bg-primary{
     border: 0px solid rgba(0, 0, 0, 0.125) !importantt;
 }
+body > div:nth-child(6) > div > div > div.col-md-6 > div {
+    background-color: rgba(53, 183, 220, 0.76) !important;
+    border: 0px !important;
+}
+img#captcha {
+    height: 25px;
+}
 </style>
 
 
@@ -30,6 +37,12 @@
 									<label  th:text="#{password}"></label> <input type="password"
 										class="form-control"  name="password" th:placeholder="#{password}"  required>
 								</div>
+								<div class="form-group">
+									<label  th:text="#{captcha}"></label> <a th:title="#{changeCaptcha}" href="javascript:getCaptcha();"><img id="captcha" src=""/></a>
+									<input type="text"
+										class="form-control"  name="code" th:placeholder="#{captcha}"  required>
+								</div>
+								
 								<button type="submit" class="btn btn-secondary"  id="login" th:text="#{login}"></button>
 								<input type="button" id="Sign_up"
 					onclick="gotoSignupPage()" class="btn btn-primary"  th:value="#{signUp}"/>
@@ -66,4 +79,5 @@
 	 <div th:replace="common/foot"></div>
 </body>
 <script type="text/javascript" th:src="@{/js/home.js}"></script>
+<script type="text/javascript" th:src="@{/js/auth.js}"></script>
 </html>

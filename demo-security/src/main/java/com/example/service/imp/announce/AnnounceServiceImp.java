@@ -29,15 +29,19 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.RequestContext;
 
+import com.example.entity.Comment;
 import com.example.entity.Picture;
 import com.example.entity.SysRole;
 import com.example.entity.SysUser;
 import com.example.entity.announce.Announce;
+import com.example.repository.CommentRepository;
 import com.example.repository.SysRoleRepository;
 import com.example.repository.announce.AnnounceRepository;
 import com.example.repository.announce.SecondHandRepository;
+import com.example.service.CommentService;
 import com.example.service.RoleService;
 import com.example.service.announce.AnnounceService;
+import com.example.util.Others;
 import com.example.util.enums.AnnounceStatus;
 import com.example.util.enums.AnnounceType;
 
@@ -49,6 +53,9 @@ public class AnnounceServiceImp implements AnnounceService {
 	
 	@Autowired
 	SecondHandRepository secondHandRepository;
+	
+	@Autowired
+	CommentService commentService;
 	
 	@Autowired
 	HttpServletRequest request;
@@ -113,6 +120,13 @@ public class AnnounceServiceImp implements AnnounceService {
 	@Override
 	public Announce findById(Long id) {
 		return this.announceRepository.findOne(id);
+	}
+
+	@Override
+	public Page<Comment> addComment(Comment comment) {
+		
+		return this.commentService.addAndSearch(comment);
+		
 	}
 
 }

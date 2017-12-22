@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/head"></head>
+<style type="text/css">
+body > div:nth-child(6) > div > div > div.col-md-6 > div {
+    background-color: rgba(53, 183, 220, 0.76) !important;
+    border: 0px !important;
+}
+.icon {
+    height: 15px;
+}
+img#captcha {
+    height: 25px;
+}
+</style>
 <body>
 	<nav th:replace="common/navbar"></nav>
 
@@ -16,25 +28,36 @@
 								@submit.prevent="onSubmit" th:action="@{/signup/create}"
 								method="post">
 								<div class="form-group">
-									<label th:text="#{username}"></label> <input type="text"
+									<label th:text="#{username}"></label>
+									&nbsp;<img v-if="usernameOk==1" id="username_ok" class="icon" th:src="@{/img/good.png}"> 
+									<span v-if="usernameOk==0" id="mail_failed" ><img class="icon" th:src="@{/img/failed.png}">&nbsp;<span th:text="#{usernameUsed}"></span></span>
+									<input type="text"
 										class="form-control" name="username" th:placeholder="#{username}"
 										placeholder="Enter user name" v-form-ctrl required
-										v-model="model.username" />
+										v-model="model.username"  onblur="isUsernameNotUsed();"/>
 								</div>
 								<div class="form-group">
-									<label th:text="#{mail}">Mail</label> <input type="email" class="form-control"
-										name="mail" placeholder="Enter email" v-form-ctrl required
-										v-model="model.mail" />
+									<label th:text="#{mail}">Mail</label>
+									&nbsp;<img v-if="mailOk==1" id="mail_ok" class="icon"  th:src="@{/img/good.png}">
+									<span  v-if="mailOk==0" id="mail_failed"><img class="icon" th:src="@{/img/failed.png}">&nbsp;<span th:text="#{mailUsed}"></span></span>
+									<input  type="email" class="form-control"
+										name="mail" th:placeholder="#{mail}" v-form-ctrl required
+										v-model="model.mail" onblur="isMailNotUsed();"/>
 								</div>
 								<div class="form-group">
 									<label th:text="#{password}"></label> <input type="password"
-										class="form-control" name="password" placeholder="Password"
+										class="form-control" name="password" th:placeholder="#{password}"
 										v-form-ctrl required v-model="model.password" />
 								</div>
 								<div class="form-group">
 									<label th:text="#{password2}"></label> <input type="password"
-										class="form-control" placeholder="Password" v-form-ctrl
+										class="form-control" th:placeholder="#{password2}" v-form-ctrl
 										required v-model="model.password2" />
+								</div>
+								<div class="form-group">
+									<label  th:text="#{captcha}"></label> <a th:title="#{changeCaptcha}" href="javascript:getCaptcha();"><img id="captcha" src=""/></a>
+									<input type="text"
+										class="form-control"  name="code" th:placeholder="#{captcha}"  required>
 								</div>
 
 								<button type="submit" class="btn btn-secondary" id="Sign_up"  th:text="#{signUp}">Sign
@@ -85,5 +108,6 @@
 	 -->
 	<div th:replace="common/foot"></div>
 </body>
-<script type="text/javascript" th:src="@{../js/home.js}"></script>
+<script type="text/javascript" th:src="@{/js/home.js}"></script>
+<script type="text/javascript" th:src="@{/js/auth.js}"></script>
 </html>

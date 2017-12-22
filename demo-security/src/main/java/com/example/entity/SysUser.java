@@ -3,7 +3,6 @@ package com.example.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,12 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.example.entity.announce.Announce;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -33,10 +31,15 @@ public class SysUser implements UserDetails {
     private String adress;
     private String telephone;
     private String mail;
+    private String wechat;
     
     @OneToMany(mappedBy="author",cascade = {CascadeType.REFRESH},fetch = FetchType.LAZY)
-    @JsonManagedReference// 避免json 的无限循环
+    @JsonBackReference // 避免json 的无限循环
     private List<Announce> announces;
+    
+    @OneToMany(mappedBy="author",cascade= {CascadeType.REFRESH},fetch=FetchType.LAZY)
+    @JsonManagedReference// 避免json 的无限循环
+	private List<Comment> comments;
     
     public List<Announce> getAnnounces() {
 		return announces;
@@ -140,4 +143,22 @@ public class SysUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+	public String getWechat() {
+		return wechat;
+	}
+
+	public void setWechat(String wechat) {
+		this.wechat = wechat;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+    
+    
 }

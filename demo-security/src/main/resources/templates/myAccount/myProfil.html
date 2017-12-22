@@ -1,58 +1,76 @@
 <style type="text/css">
 .col-md-12 {
-    padding-bottom: 5px;
+	padding-bottom: 5px;
 }
+
 .table th, .table td {
-    padding: 0.5rem;
+	padding: 0.5rem;
 }
+
 .btn {
-    padding: 0.25rem 0.75rem 0.25rem;
-    height: 2.4rem;
+	padding: 0.25rem 0.75rem 0.25rem;
+	height: 2.4rem;
 }
 </style>
 <div class="py-0" id="myProfil" name="content">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<span class="lead w-25">Role List </span>
-				<button type="submit" class="btn btn-primary" style="float: right">+</button>
-				<span style="float: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<button type="submit" class="btn btn-primary form-control" style="float: right">Search</button>
-				<input class=" mr-2 w-25 ml-auto" type="text"
-					placeholder="User Name" style="float: right">
+				<span class="lead w-25"
+					><b th:text="${#httpServletRequest.getUserPrincipal()?.getName()}"></b></span>
+				<button type="submit" class="btn btn-primary" style="float: right"
+					th:text="#{edit}"></button>
+
 			</div>
 		</div>
+		<hr>
 		<div class="row">
-			<div class="col-md-12">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Role name</th>
-							<th>Adress</th>
-							<th>Telephone</th>
-							<th>Mail</th>
-							<th>Traitement</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Mark</td>
-							<td>Otto</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Jacob</td>
-							<td>Thornton</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Larry</td>
-							<td>the Bird</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="col-md-6">
+				<div class="card-body" id="addSecondHand">
+					<form role="form" name="form" id="addSecondHandForm"
+						th:action="@{/secondHand/add}" method="post">
+						<div class="form-group">
+							<label th:text="#{mail}"></label> <input type="text"
+								class="form-control" name="title" th:placeholder="#{mail}"
+								v-form-ctrl required v-model="datas.title" />
+						</div>
+						<div class="form-group">
+							<label th:text="#{phone}"></label> <input type="text"
+								class="form-control" name="price" th:placeholder="#{phone}"
+								v-form-ctrl required v-model="datas.price" />
+						</div>
+						<div class="form-group">
+							<label th:text="#{wechat}"></label> <input type="text"
+								class="form-control" name="price" th:placeholder="#{wechat}"
+								v-form-ctrl required v-model="datas.price" />
+						</div>
+						<div class="form-group">
+							<label th:text="#{price}"></label> <input type="text"
+								class="form-control" name="price" th:placeholder="#{price}"
+								v-form-ctrl required v-model="datas.price" />
+						</div>
+						<div class="form-group">
+							<label th:text="#{price}"></label> <input type="text"
+								class="form-control" name="price" th:placeholder="#{price}"
+								v-form-ctrl required v-model="datas.price" />
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<br>
+				<div class="card-body">
+					<div class="row">
+						<div class="p-0 col-md-4 col-6">
+							<img th:src="@{/img/no-image.png}" class="img-fluid">
+						</div>
+						<br/> <label th:text="#{uploadPics}"></label> <br> <input
+							class="form-control" class="btn btn-primary" type="file" multiple
+							name="file" id="file">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,53 @@
+<script type="text/javascript" th:src="@{/js/announce/share.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/plugins/ckeditor/ckeditor.js}"></script>
+
+<div id="add" style="display: none">
+	<div class="row">
+		<div class="col-md-12">
+			<span class="lead w-25" th:text="#{share}+'/'+#{sall}"></span>
+			<button type="submit" class="btn btn-primary" style="float: right"
+				onclick="addAnnounceSubmit()" th:text="#{publish}"></button>
+			<span style="float: right">&nbsp;&nbsp;</span>
+			<button type="submit" class="btn btn-primary" style="float: right"
+				onclick="showListAnnounce()" th:text="#{return}"></button>
+
+
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+
+		<div class="col-md-10">
+			<form role="form" name="form" id="addAnnounceForm"
+				th:action="@{/share/add}" method="post">
+				<div class="card-body" id="addShare">
+
+					<div class="form-group">
+						<label th:text="#{title}"></label> <input type="text"
+							class="form-control" name="title" th:placeholder="#{title}"
+							v-form-ctrl required />
+					</div>
+					<div class="form-group">
+						<label th:text="#{content}"></label>
+						<!-- class="ckeditor" -->
+						<textarea class="ckeditor" cols="80" name="description"
+							rows="20" v-form-ctrl required></textarea>
+
+					</div>
+
+
+				</div>
+			</form>
+		</div>
+
+
+
+	</div>
+
+
+
+
+</div>
+
+

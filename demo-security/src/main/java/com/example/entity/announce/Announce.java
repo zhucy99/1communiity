@@ -10,23 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.example.entity.Comment;
+import com.example.entity.Picture;
 import com.example.entity.SysUser;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @OnDelete(action = OnDeleteAction.CASCADE)
 public class Announce {
-	
+
 	public static final int TYPE_SECONDHAND = 1;
 	public static final int TYPE_SHARE = 2;
 	public static final int TYPE_QUESTION = 3;
-	
+
 	public static final int STATUS_CREATE = 1;
 	public static final int STATUS_PUBLISHED = 2;
 	public static final int STATUS_END = 3;
@@ -37,24 +41,28 @@ public class Announce {
 	private Long id;
 	private String title;
 	private String description;
-	
 
 	private int type;
 	@Transient
 	private String typeStr;
-	
+
 	private int status;
 	@Transient
 	private String statusStr;
 
 	@ManyToOne
-	@JsonBackReference// 避免json 的无限循环
+	@JsonManagedReference // 避免json 的无限循环
 	private SysUser author;
 	private Date createTime;
-	
+
 	@Transient
 	private String createTimeStr;
 	private Date lastEditTime;
+
+	// 用mqppedBy,避免中间表的产生
+	@OneToMany(mappedBy = "author", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@JsonManagedReference // 避免json 的无限循环
+	private List<Comment> comments;
 
 	public int getStatus() {
 		return status;
@@ -144,6 +152,14 @@ public class Announce {
 		this.createTimeStr = createTimeStr;
 	}
 
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	
 
 }

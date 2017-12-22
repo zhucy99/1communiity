@@ -27,7 +27,7 @@ function find(page) {
 	});
 }
 
-function userManageFind(){
+function announceManageFind(){
 	find();
 }
 
@@ -53,5 +53,5 @@ var am = new Vue({
     }
 })
 
-find();
+window.onload="find()";
 

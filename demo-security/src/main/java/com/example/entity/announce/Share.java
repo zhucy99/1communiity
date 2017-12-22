@@ -22,8 +22,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="ann_secondhand")
-public class SecondHand extends Announce{
+@Table(name="ann_share")
+public class Share extends Announce{
 	
 	// 用mqppedBy,避免中间表的产生
 	@OneToMany(mappedBy = "secondHand", cascade = { CascadeType.PERSIST, CascadeType.REMOVE})
@@ -34,16 +34,6 @@ public class SecondHand extends Announce{
 	@JsonBackReference // 避免json 的无限循环
 	private Category category;
 	
-	private double price;
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
 	public List<Picture> getPictures() {
 		return pictures;
 	}

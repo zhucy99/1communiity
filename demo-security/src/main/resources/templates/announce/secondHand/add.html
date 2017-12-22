@@ -5,22 +5,23 @@
 <div id="add" style="display: none">
 	<div class="row">
 		<div class="col-md-12">
-			<span class="lead w-25"
-				th:text="#{secondHand}+'/'+#{sall}"></span>
+			<span class="lead w-25" th:text="#{secondHand}+'/'+#{sall}"></span>
 			<button type="submit" class="btn btn-primary" style="float: right"
-				onclick="addSecondHandSubmit()" th:text="#{publish}"></button>
+				onclick="addAnnounceSubmit()" th:text="#{publish}"></button>
 			<span style="float: right">&nbsp;&nbsp;</span>
 			<button type="submit" class="btn btn-primary" style="float: right"
-				onclick="showListSecondHand()" th:text="#{return}"></button>
+				onclick="showListAnnounce()" th:text="#{return}"></button>
 
 
 		</div>
 	</div>
 	<hr>
 	<div class="row">
-		<form role="form" name="form" id="addSecondHandForm"
-			th:action="@{/secondHand/add}" method="post" enctype="multipart/form-data">
+		
 			<div class="col-md-6">
+			<form role="form" name="form" id="addAnnounceForm"
+			th:action="@{/secondHand/add}" method="post"
+			enctype="multipart/form-data">
 				<div class="card-body" id="addSecondHand">
 
 					<div class="form-group">
@@ -29,53 +30,56 @@
 							v-form-ctrl required />
 					</div>
 					<div class="form-group">
-						<label th:text="#{content}">Mail</label>
-						<textarea class="ckeditor" cols="80" name="description" rows="12"
+						<label th:text="#{price}"></label> <input type="text"
+							class="form-control" name="price" th:placeholder="#{price}"
 							v-form-ctrl required />
+					</div>
+					<div class="form-group">
+						<label th:text="#{uploadPics}"></label> <br> <input
+							class="form-control" class="btn btn-primary" type="file" multiple
+							name="file" id="file">
+
+					</div>
+					<div class="form-group">
+						<label th:text="#{content}"></label>
+						<!-- class="ckeditor" -->
+						<textarea class="ckeditor" cols="80" name="description" rows="12"
+							v-form-ctrl required ></textarea>
 
 					</div>
 
 
 				</div>
+				</form>
 			</div>
-			<div class="col-md-6">
+		
+		<div class="col-md-6">
+			<br>
+			<div class="card-body">
+				<div class="row">
+					<div class="p-0 col-md-4 col-6">
+						<img th:src="@{/img/no-image.png}" class="img-fluid" >
+					</div>
+					<div class="col-md-4 col-6 p-0">
+						<img th:src="@{/img/no-image.png}" class="img-fluid" >
+					</div>
+					<div class="col-md-4 col-6 p-0">
+						<img th:src="@{/img/no-image.png}" class="img-fluid" >
+					</div>
+					<div class="col-md-4 col-6 p-0">
+						<img th:src="@{/img/no-image.png}" class="img-fluid" >
+					</div>
+					<div class="col-md-4 col-6 p-0">
+						<img th:src="@{/img/no-image.png}" class="img-fluid" >
+					</div>
+					<div class="col-md-4 col-6 p-0">
+						<img th:src="@{/img/no-image.png}" class="img-fluid" >
+					</div>
+				</div>
 				<br>
-				<div class="card-body">
-					<div class="row">
-						<div class="p-0 col-md-4 col-6">
-							<img th:src="@{/img/no-image.png}" class="img-fluid">
-						</div>
-						<div class="col-md-4 col-6 p-0">
-							<img th:src="@{/img/no-image.png}" class="img-fluid">
-						</div>
-						<div class="col-md-4 col-6 p-0">
-							<img th:src="@{/img/no-image.png}" class="img-fluid">
-						</div>
-						<div class="col-md-4 col-6 p-0">
-							<img th:src="@{/img/no-image.png}" class="img-fluid">
-						</div>
-						<div class="col-md-4 col-6 p-0">
-							<img th:src="@{/img/no-image.png}" class="img-fluid">
-						</div>
-						<div class="col-md-4 col-6 p-0">
-							<img th:src="@{/img/no-image.png}" class="img-fluid">
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div>
-							<input class="btn btn-primary" type="file" name="file"><br>
-							<input class="btn btn-primary" type="file" name="file"><br>
-							<input class="btn btn-primary" type="file" name="file"><br>
-							<input class="btn btn-primary" type="file" name="file"><br>
-							<input class="btn btn-primary" type="file" name="file"><br>
-							<input class="btn btn-primary" type="file" name="file"><br>
-
-						</div>
-					</div>
-				</div>
 			</div>
-		</form>
+		</div>
+
 	</div>
 
 
