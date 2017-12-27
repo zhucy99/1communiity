@@ -24,9 +24,15 @@ input.form-control.mr-2 {
 	<div class="bg-light text-dark py-3">
 		<div class="container p-2 ml-auto">
 
-			<div th:replace="/announce/share/list"></div>
-			<div th:replace="/announce/share/add"></div>
-			<div th:replace="/announce/share/detail"></div>
+			<div th:if="${content=='list'}">
+				<div th:replace="/announce/share/list"></div>
+			</div>
+			<div th:if="${content=='add'}">
+				<div th:replace="/announce/share/add"></div>
+			</div>
+			<div th:if="${content=='detail'}">
+				<div th:replace="/announce/share/detail"></div>
+			</div>
 		</div>
 	</div>
 	<div th:replace="common/foot"></div>
@@ -45,8 +51,7 @@ input.form-control.mr-2 {
 		crossorigin="anonymous"></script>
 	<script type="text/javascript"
 		th:src="@{/js/plugins/jquery-3.2.1.min.js}"></script>
-		
-
+	<script type="text/javascript" th:src="@{/js/announce/announce.js}"></script>
 
 </body>
 

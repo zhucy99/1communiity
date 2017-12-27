@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import com.example.entity.announce.Announce;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="comment")
@@ -30,8 +31,8 @@ public class Comment {
     private Announce announce;
 	
 	@ManyToOne
-    @JsonBackReference // 避免json 的无限循环
     @JoinColumn(name = "author_id")
+	@JsonManagedReference// 避免json 的无限循环
 	private SysUser author;
 	
 	@Column(name = "create_time")

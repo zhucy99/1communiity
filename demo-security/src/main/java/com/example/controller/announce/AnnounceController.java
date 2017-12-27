@@ -66,7 +66,7 @@ public class AnnounceController {
 	
 	@RequestMapping(value = "/getComments", method = { RequestMethod.GET })
 	public @ResponseBody Page<Comment> getComments(
-			@RequestParam(value = "announce_id") Comment comment,
+			@ModelAttribute(value = "comment") Comment comment,
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "size", defaultValue = "5") int size) {
 		Page<Comment> pager = this.commentService.findSearch(comment, page, size);

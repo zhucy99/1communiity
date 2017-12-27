@@ -15,4 +15,4 @@ var pager = new Vue({
 			return this.datas.totalPages>10;
 		}
 	}
-})
+});

@@ -1,17 +1,3 @@
-function find(page) {
-	if (page == null) {
-		page = 1;
-	}
-	$.get("/share/search", {
-		title : announcesList.search,
-		page : page
-	}, function(data) {
-		announcesList.announces = data.content;
-		pager.datas = data;
-		pager.currentPage = page;
-	});
-}
-
 function showDetail(id) {
 	$.get("/share/findById", {
 		id : id
@@ -22,7 +8,7 @@ function showDetail(id) {
 		}
 		$("#description").html(detail.datas.description);
 		showDetailAnnounce();
-		getComments();
+		getComments(data.id);
 	});
 }
 
@@ -65,13 +51,17 @@ function addComment() {
 	
 }
 
-function getComments() {
+function getComments(announce_id) {
+	
+	if(announce_id==null){
+		announce_id =$("#comment_announce_id").val();
+	}
 	
 	$.ajax({
 		  type: "GET",
 		  url: "/announce/getComments",
 		  data: {
-			  "announce.id":$("#comment_announce_id").val(),
+			  "announce.id":announce_id,
 			  "page":1
 			},
 		  success: function(data) {

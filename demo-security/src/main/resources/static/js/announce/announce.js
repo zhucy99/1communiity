@@ -2,8 +2,7 @@ function addAnnounceSubmit() {
 	$("#addAnnounceForm").submit();
 }
 function showAddAnnounce() {
-	hideAll();
-	$("#add").css("display", "block");
+	 window.location.href = '/share?content=add';
 }
 function showListAnnounce() {
 	hideAll();
@@ -18,3 +17,8 @@ function hideAll(){
 	$("#listPage").css("display", "none");
 	$("#detail").css("display", "none");
 }
+
+$('#someButton').click(function() {
+   
+    return false;
+});

@@ -38,7 +38,7 @@ public class SysUser implements UserDetails {
     private List<Announce> announces;
     
     @OneToMany(mappedBy="author",cascade= {CascadeType.REFRESH},fetch=FetchType.LAZY)
-    @JsonManagedReference// 避免json 的无限循环
+    @JsonBackReference // 避免json 的无限循环
 	private List<Comment> comments;
     
     public List<Announce> getAnnounces() {

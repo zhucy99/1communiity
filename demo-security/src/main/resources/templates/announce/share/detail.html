@@ -34,7 +34,7 @@ div.comment {
 }
 </style>
 
-<div id="detail" style="display: none">
+<div id="detail">
 	<div class="row">
 		<div class="col-md-12">
 			<input type="hidden"
@@ -58,18 +58,19 @@ div.comment {
 
 	<div class="row">
 		<div class="align-self-center pl-5 pr-5 pt-5 pb-3 col-md-12">
+			<input type="hidden" id="id" th:value="${id}">
 			<h1 class="mb-4">{{datas.title}}</h1>
 			<hr>
 			<p class="mb-5" v-html="datas.description"></p>
 
 			<hr>
-			<div id="contact" class="right col-md-3" v-if="datas.author!=null">
-				<span class="mb-5"><label th:text="#{publisher}"></label>:{{datas.author.username}}</span>&nbsp;|&nbsp;
-				<span class="mb-5"><label th:text="#{publishTime}"></label>:{{datas.createTime}}</span>
+			<div id="contact" class="right col-md-3">
+				<span class="mb-5"><label th:text="#{publisher}"></label>:<span
+					v-if="datas.author!=null">{{datas.author.username}}</span></span>&nbsp;|&nbsp;
+				<span class="mb-5"><label th:text="#{publishTime}"></label>:<span>{{datas.createTime}}</span></span>
 			</div>
 
 		</div>
-
 	</div>
 	<template v-for="comment in comments">
 	<div class="row">
@@ -77,24 +78,28 @@ div.comment {
 			<p class="mb-5" v-html="comment.content"></p>
 			<hr>
 			<div id="contact" class="right col-md-3" v-if="datas.author!=null">
-				<span class="mb-5"><label th:text="#{publisher}"></label>:{{comment.author.name}}</span>&nbsp;|&nbsp;
-				<span class="mb-5"><label th:text="#{publishTime}"></label>:{{comment.createTime}}</span>
+				<span class="mb-5"><label th:text="#{commentator}"></label>:{{comment.author.username}}</span>&nbsp;|&nbsp;
+				<span class="mb-5"><label th:text="#{commentTime}"></label>:{{comment.createTime}}</span>
 			</div>
 		</div>
 	</div>
 	</template>
-
-	<div class="row">
-		<div class="align-self-center p-3 col-md-12 comment">
-			<input type="hidden" :value="datas.id" id="comment_announce_id" />
-			<textarea class="ckeditor" cols="80" rows="20" id="comment_content"
-				v-form-ctrl required></textarea>
-			<button class="btn mt-2 btn-primary" style="float: right"
-				onclick="addComment()" th:text="#{publishComment}"></button>
-		</div>
-	</div>
-
 </div>
-<script type="text/javascript" th:src="@{/js/announce/share.js}"></script>
+
+<div th:replace="common/pageBar"></div>
+<div class="row">
+	<div class="align-self-center p-3 col-md-12 comment">
+		<textarea class="ckeditor" cols="80" rows="20" id="comment_content"
+			v-form-ctrl required></textarea>
+		<button class="btn mt-2 btn-primary" style="float: right"
+			onclick="addComment()" th:text="#{publishComment}"></button>
+	</div>
+</div>
+
+
+
+
+
+<script type="text/javascript" th:src="@{/js/announce/share/detail.js}"></script>
 <script type="text/javascript"
 	th:src="@{/js/plugins/ckeditor/ckeditor.js}"></script>

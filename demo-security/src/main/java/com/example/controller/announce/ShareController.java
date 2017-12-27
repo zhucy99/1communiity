@@ -24,8 +24,17 @@ public class ShareController {
 
 
 	@RequestMapping(value = "")
-	public String share() {
+	public String share(@RequestParam(value = "content", defaultValue = "list") String content,@RequestParam(value = "id", required=false) Long id, Model model) {
+		model.addAttribute("content", content);
+		model.addAttribute("id", id);
 		return "announce/share/main";
+	}
+	
+	@RequestMapping(value = "detail")
+	public String detail(@RequestParam(value = "id") Long id, Model model) {
+		Share share = shareService.findById(id);
+		model.addAttribute("data", share);
+		return "announce/share/detail";
 	}
 	
 	@RequestMapping(value = "/add", method = { RequestMethod.POST })
