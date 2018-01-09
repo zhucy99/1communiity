@@ -156,4 +156,9 @@ public class UserServiceImp implements UserDetailsService, UserService {
 		}
 	}
 
+	@Override
+	public SysUser findById(Long id) {
+		return this.userRepository.getOne(id);
+	}
+
 }

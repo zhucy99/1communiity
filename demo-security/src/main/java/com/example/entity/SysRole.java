@@ -3,6 +3,7 @@ package com.example.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class SysRole {
@@ -11,6 +12,12 @@ public class SysRole {
     private Long id;
     private String name;
     private String description;
+    
+    @Transient
+    private String descriptionTrad;
+    
+    @Transient
+    private String nameTrad;
 
 
     public String getDescription() {
@@ -36,4 +43,21 @@ public class SysRole {
     public void setName(String name) {
         this.name = name;
     }
+
+	public String getDescriptionTrad() {
+		return descriptionTrad;
+	}
+
+	public void setDescriptionTrad(String descriptionTrad) {
+		this.descriptionTrad = descriptionTrad;
+	}
+
+	public String getNameTrad() {
+		return nameTrad;
+	}
+
+	public void setNameTrad(String nameTrad) {
+		this.nameTrad = nameTrad;
+	}
+    
 }

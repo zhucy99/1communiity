@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.entity.SysUser;
+import com.example.entity.announce.Share;
 import com.example.service.imp.UserServiceImp;
 
 @Controller
@@ -63,5 +64,11 @@ public class UserController {
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "size", defaultValue = "10") int size) {
 		return this.customUserService.delete(user, page, size);
+	}
+	
+	@RequestMapping(value = "/findById", method = { RequestMethod.GET })
+	public @ResponseBody SysUser findById(@RequestParam(value = "id") Long id) {
+		SysUser user = this.customUserService.findById(id);
+		return user;
 	}
 }

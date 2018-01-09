@@ -12,14 +12,16 @@
 	height: 2.4rem;
 }
 </style>
-<div class="py-0" id="myProfil" name="content">
+<div class="py-0" id="detail" name="content">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<span class="lead w-25"
 					><b th:text="${#httpServletRequest.getUserPrincipal()?.getName()}"></b></span>
 				<button type="submit" class="btn btn-primary" style="float: right"
-					th:text="#{edit}"></button>
+					th:text="#{edit}" v-if="!toSave" onclick="toSave()"></button>
+				<button type="submit" class="btn btn-primary" style="float: right"
+					th:text="#{save}" v-if="toSave" onclick="save()"></button>
 
 			</div>
 		</div>
@@ -27,33 +29,31 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="card-body" id="addSecondHand">
+				
 					<form role="form" name="form" id="addSecondHandForm"
 						th:action="@{/secondHand/add}" method="post">
+						<input id="id" type="hidden" name="id" th:value="${id}">
 						<div class="form-group">
 							<label th:text="#{mail}"></label> <input type="text"
-								class="form-control" name="title" th:placeholder="#{mail}"
-								v-form-ctrl required v-model="datas.title" />
+								class="form-control" th:placeholder="#{mail}"
+								v-form-ctrl required v-model="datas.mail" disabled/>
+						</div>
+						<div class="form-group">
+							<label th:text="#{adress}"></label> <input type="text"
+								class="form-control" name="adress" th:placeholder="#{adress}"
+								v-form-ctrl required v-model="datas.adress"  :disabled="!editable"/>
 						</div>
 						<div class="form-group">
 							<label th:text="#{phone}"></label> <input type="text"
-								class="form-control" name="price" th:placeholder="#{phone}"
-								v-form-ctrl required v-model="datas.price" />
+								class="form-control" name="telephone" th:placeholder="#{phone}"
+								v-form-ctrl required v-model="datas.telephone"  :disabled="!editable"/>
 						</div>
 						<div class="form-group">
 							<label th:text="#{wechat}"></label> <input type="text"
-								class="form-control" name="price" th:placeholder="#{wechat}"
-								v-form-ctrl required v-model="datas.price" />
+								class="form-control" name="wechat" th:placeholder="#{wechat}"
+								v-form-ctrl required v-model="datas.wechat"  :disabled="!editable"/>
 						</div>
-						<div class="form-group">
-							<label th:text="#{price}"></label> <input type="text"
-								class="form-control" name="price" th:placeholder="#{price}"
-								v-form-ctrl required v-model="datas.price" />
-						</div>
-						<div class="form-group">
-							<label th:text="#{price}"></label> <input type="text"
-								class="form-control" name="price" th:placeholder="#{price}"
-								v-form-ctrl required v-model="datas.price" />
-						</div>
+						
 
 					</form>
 				</div>
@@ -75,4 +75,6 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript" th:src="@{/js/myAccount/profil/detail.js}"></script>
 

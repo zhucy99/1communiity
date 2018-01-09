@@ -1,5 +1,6 @@
 package com.example.service.imp.announce;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,12 +17,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.RequestContext;
+
 import com.example.entity.SysUser;
 import com.example.entity.announce.Announce;
 import com.example.entity.announce.Share;
 import com.example.repository.announce.ShareRepository;
 import com.example.service.announce.ShareService;
 import com.example.util.Others;
+import com.example.util.enums.AnnounceStatus;
+import com.example.util.enums.AnnounceType;
 
 @Service
 public class ShareServiceImp implements ShareService {
@@ -89,7 +94,13 @@ public class ShareServiceImp implements ShareService {
 	
 	@Override
 	public Share findById(Long id) {
-		return this.shareRepository.findOne(id);
+		return this.format(this.shareRepository.findOne(id));
 	}
-
+	
+	private Share format(Share share) {
+		RequestContext requestContext = new RequestContext(request);
+		SimpleDateFormat dt = new SimpleDateFormat(requestContext.getMessage("dateFormat"));
+		share.setCreateTimeStr(dt.format(share.getCreateTime()));
+		return share;
+	}
 }

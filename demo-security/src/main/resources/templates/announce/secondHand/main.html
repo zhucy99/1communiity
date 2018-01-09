@@ -2,6 +2,10 @@
 <html>
 <head th:replace="common/head"></head>
 
+<!-- NProgress -->
+<link th:href="@{/plugins/dropzone/dropzone.css}"
+	rel="stylesheet">
+
 <style type="text/css">
 .py-5.gradient-overlay {
 	background-image: url('/img/index.jpg');
@@ -24,14 +28,20 @@ input.form-control.mr-2 {
 
 	<div class="bg-light text-dark py-3">
 		<div class="container p-2 ml-auto">
-
-			<div th:replace="/announce/secondHand/list"></div>
-			<div th:replace="/announce/secondHand/add"></div>
-			<div th:replace="/announce/secondHand/detail"></div>
+			<div th:if="${content=='list'}">
+				<div th:replace="/announce/secondHand/list"></div>
+			</div>
+			<div th:if="${content=='add'}">
+				<div th:replace="/announce/secondHand/add"></div>
+			</div>
+			<div th:if="${content=='detail'}">
+				<div th:replace="/announce/secondHand/detail"></div>
+			</div>
 		</div>
 	</div>
 	<div th:replace="common/foot"></div>
 
+	<script th:src="@{/plugins/dropzone/dropzone.js}"></script>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -46,6 +56,7 @@ input.form-control.mr-2 {
 		crossorigin="anonymous"></script>
 	<script type="text/javascript"
 		th:src="@{/js/plugins/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/announce/announce.js}"></script>
 
 </body>
 

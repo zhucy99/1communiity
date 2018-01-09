@@ -10,23 +10,27 @@
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="nav nav-tabs" id="tabs">
-						<li class="nav-item"><a class="active nav-link"
-							href="javascript:changeTab('userManage')" id="userManage_tab">User
-								Manage</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="javascript:changeTab('roleManage')" id="roleManage_tab">Role
-								Manage</a></li>
+						<li class="nav-item"><a class="nav-link" th:classappend="${content=='user'} ? active : ''"
+							th:href="@{/admin?content=user}" id="userManage_tab" th:text="#{userManage}"></a></li>
+						<li class="nav-item"><a class="nav-link" th:classappend="${content=='role'} ? active : ''"
+							th:href="@{/admin?content=role}" id="roleManage_tab" th:text="#{roleManage}"></a></li>
+						<li class="nav-item"><a class="nav-link" th:classappend="${content=='announce'} ? active : ''"
+							th:href="@{/admin?content=announce}" id="roleManage_tab" th:text="#{announceManage}"></a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div th:if="${content=='user'}">
+		<div th:replace="/admin/user/main"></div>
+	</div>
+	<div th:if="${content=='role'}">
+		<div th:replace="/admin/role/main"></div>
+	</div>
+	<div th:if="${content=='announce'}">
+		<div th:replace="/admin/announce/main"></div>
+	</div>
 
-	<div th:replace="admin/userManage"></div>
-	<div th:replace="admin/roleManage"></div>
-	
-	<div th:replace="common/pageBar"></div>
-	
 	<div th:replace="common/foot"></div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -47,7 +51,6 @@
 	<script type="text/javascript" th:src="@{/js/home.js}"></script>
 	<script type="text/javascript" th:src="@{/js/admin.js}"></script>
 	<script type="text/javascript" th:src="@{/js/plugins/vue.min.js}"></script>
-	<script type="text/javascript" th:src="@{/js/user.js}"></script>
 
 </body>
 

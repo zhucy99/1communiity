@@ -5,15 +5,18 @@
 .py-5.gradient-overlay {
 	background-image: url('/img/index.jpg');
 }
+
 .card-header.bg-primary.text-white.text-center.secondHand {
-    background-color: rgba(255, 138, 0, 0.79) !important;
+	background-color: rgba(255, 138, 0, 0.79) !important;
 }
+
 .card-header.bg-primary.text-white.text-center.question {
-    background-color: rgb(84, 228, 87) !important;
+	background-color: rgb(84, 228, 87) !important;
 }
+
 img.secondHandImg {
-    width: 100%;
-    height: 230px;
+	width: 100%;
+	height: 230px;
 }
 </style>
 <body>
@@ -23,17 +26,24 @@ img.secondHandImg {
 		<div class="container py-5">
 			<div class="row">
 				<div class="col-md-3 text-white">
-					<img class="img-fluid d-block mx-auto mb-5" 
+					<img class="img-fluid d-block mx-auto mb-5"
 						th:src="@{/img/dragon.png}">
 				</div>
 				<div class="col-md-9 text-white align-self-center">
-					<h1 class="display-3 mb-4" th:text="#{index.title}">Image and gradient intro</h1>
-					<p class="lead mb-5"  th:text="#{index.description}">
+					<h1 class="display-3 mb-4" th:text="#{index.title}">Image and
+						gradient intro</h1>
+					<p class="lead mb-5" th:text="#{index.description}">
 						Get a fluid web page working on all devices with the Bootstrap 4
 						grid system.&nbsp; <br>
 					</p>
-					<a href="#" class="btn btn-lg mx-1 btn-secondary" th:text="#{presentation}"></a>
-					<a href="#" class="btn btn-lg btn-primary mx-1" th:text="#{aboutTeam}" th:href="@{/secondHand}"></a>
+					<a href="#" class="btn btn-lg mx-1 btn-secondary"
+						th:text="#{secondHand}"></a> <a href="#"
+						class="btn btn-lg btn-primary mx-1" th:text="#{serviceTrading}"
+						th:href="@{/secondHand}"></a> <a href="#"
+						class="btn btn-lg btn-primary mx-1" th:text="#{share}"
+						th:href="@{/secondHand}"></a> <a href="#"
+						class="btn btn-lg btn-primary mx-1" th:text="#{question}"
+						th:href="@{/secondHand}"></a>
 				</div>
 			</div>
 		</div>
@@ -43,7 +53,9 @@ img.secondHandImg {
 			<div class="row">
 				<div class="col-md-3 my-3">
 					<div class="card">
-						<div class="card-header bg-primary text-white text-center secondHand" th:text="#{secondHand}"></div>
+						<div
+							class="card-header bg-primary text-white text-center secondHand"
+							th:text="#{secondHand}"></div>
 						<img class="img-fluid"
 							src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg"
 							alt="Card image">
@@ -51,31 +63,37 @@ img.secondHandImg {
 							<h6 class="card-subtitle text-muted">Support card subtitle</h6>
 							<p class="card-text p-y-1">Some quick example text to build
 								on the card title .</p>
-							<a th:href="@{/secondHand}" class="card-link" th:text="#{index.more}"></a> 
+							<a th:href="@{/secondHand}" class="card-link"
+								th:text="#{index.more}"></a>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3 my-3" th:each="secondHand : ${secondHands}">
-				
-				
-					<img th:if="${secondHand.pictures.size()!=0}" class="img-fluid d-block mb-4 secondHandImg"
-						th:src="'/userImg/'+${secondHand.pictures[0].fileName}">
-					<img th:if="${secondHand.pictures.size()==0}" class="img-fluid d-block mb-4 secondHandImg"
-						th:src="@{/img/secondHand.jpg}">
-						
-					<h5>
-						<span class="mt-1" th:text="${secondHand.price}+' €/ '"></span><b th:text="${secondHand.title}"></b>
-					</h5>
-					<p th:text="${secondHand.description}"></p>
-					
+					<div class="card">
+
+						<img th:if="${secondHand.pictures.size()!=0}"
+							class="img-fluid d-block mb-4 secondHandImg"
+							th:src="'/userImg/'+${secondHand.pictures[0].fileName}"> <img
+							th:if="${secondHand.pictures.size()==0}"
+							class="img-fluid d-block mb-4 secondHandImg"
+							th:src="@{/img/secondHand.jpg}">
+						<div class="card-body">
+							<h5>
+								<span class="mt-1" th:text="${secondHand.price}+' € | '"></span><b
+									th:text="${secondHand.title}"></b>
+							</h5>
+							<p th:text="${secondHand.description}"></p>
+						</div>
+					</div>
 				</div>
-				
+
 			</div>
 			<hr>
 			<div class="row">
 				<div class="col-md-3 my-3">
 					<div class="card">
-						<div class="card-header bg-primary text-white text-center share" th:text="#{share}"></div>
+						<div class="card-header bg-primary text-white text-center share"
+							th:text="#{share}"></div>
 						<img class="img-fluid"
 							src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg"
 							alt="Card image">
@@ -83,7 +101,7 @@ img.secondHandImg {
 							<h6 class="card-subtitle text-muted">Support card subtitle</h6>
 							<p class="card-text p-y-1">Some quick example text to build
 								on the card title .</p>
-							<a th:href="@{/share}" class="card-link"  th:text="#{index.more}"></a> 
+							<a th:href="@{/share}" class="card-link" th:text="#{index.more}"></a>
 						</div>
 					</div>
 				</div>
@@ -128,7 +146,9 @@ img.secondHandImg {
 			<div class="row">
 				<div class="col-md-3 my-3">
 					<div class="card">
-						<div class="card-header bg-primary text-white text-center question"  th:text="#{question}"></div>
+						<div
+							class="card-header bg-primary text-white text-center question"
+							th:text="#{question}"></div>
 						<img class="img-fluid"
 							src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg"
 							alt="Card image">
@@ -136,7 +156,7 @@ img.secondHandImg {
 							<h6 class="card-subtitle text-muted">Support card subtitle</h6>
 							<p class="card-text p-y-1">Some quick example text to build
 								on the card title .</p>
-							<a href="#" class="card-link"  th:text="#{index.more}"></a> 
+							<a href="#" class="card-link" th:text="#{index.more}"></a>
 						</div>
 					</div>
 				</div>

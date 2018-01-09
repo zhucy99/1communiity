@@ -11,4 +11,5 @@ public interface UserService extends UserDetailsService{
 	Page<SysUser> add(SysUser user);
 	int addWithRole(SysUser user);
 	Page<SysUser> delete(SysUser model,int page, int size);
+	SysUser findById(Long id);
 }

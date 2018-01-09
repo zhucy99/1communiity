@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.example.entity.announce.Announce;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -37,6 +38,9 @@ public class Comment {
 	
 	@Column(name = "create_time")
 	private Date createTime;
+	
+	@Transient
+	private String createTimeStr;
 
 	public Long getId() {
 		return id;
@@ -76,6 +80,14 @@ public class Comment {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getCreateTimeStr() {
+		return createTimeStr;
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
 	}
 	
 }

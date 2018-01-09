@@ -47,19 +47,19 @@ import com.example.util.enums.AnnounceType;
 
 @Service
 public class AnnounceServiceImp implements AnnounceService {
-	
+
 	@Autowired
 	AnnounceRepository announceRepository;
-	
+
 	@Autowired
 	SecondHandRepository secondHandRepository;
-	
+
 	@Autowired
 	CommentService commentService;
-	
+
 	@Autowired
 	HttpServletRequest request;
-	
+
 	@Override
 	public Page<Announce> findAll(int page, int size) {
 		// TODO Auto-generated method stub
@@ -80,8 +80,8 @@ public class AnnounceServiceImp implements AnnounceService {
 				if (model.getTitle() != null) {
 					list.add(cb.like(root.get("title").as(String.class), "%" + model.getTitle() + "%"));
 				}
-				
-				if (model.getAuthor() != null&&model.getAuthor().getId()!=null) {
+
+				if (model.getAuthor() != null && model.getAuthor().getId() != null) {
 					list.add(cb.equal(root.get("author").as(SysUser.class), model.getAuthor()));
 				}
 
@@ -93,16 +93,20 @@ public class AnnounceServiceImp implements AnnounceService {
 		format(result.getContent());
 		return result;
 	}
-	
+
 	private void format(List<Announce> announces) {
-		
-		RequestContext requestContext = new RequestContext(request);
-		for(Announce announce:announces) {
-			SimpleDateFormat dt = new SimpleDateFormat(requestContext.getMessage("dateFormat"));
-			announce.setCreateTimeStr(dt.format(announce.getCreateTime()));
-			announce.setTypeStr(requestContext.getMessage(AnnounceType.getNameByCode(announce.getType())));
-			announce.setStatusStr(requestContext.getMessage(AnnounceStatus.getNameByCode(announce.getStatus())));
+		for (Announce announce : announces) {
+			this.format(announce);
 		}
+	}
+
+	private void format(Announce announce) {
+
+		RequestContext requestContext = new RequestContext(request);
+		SimpleDateFormat dt = new SimpleDateFormat(requestContext.getMessage("dateFormat"));
+		announce.setCreateTimeStr(dt.format(announce.getCreateTime()));
+		announce.setTypeStr(requestContext.getMessage(AnnounceType.getNameByCode(announce.getType())));
+		announce.setStatusStr(requestContext.getMessage(AnnounceStatus.getNameByCode(announce.getStatus())));
 	}
 
 	@Override
@@ -116,17 +120,19 @@ public class AnnounceServiceImp implements AnnounceService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public Announce findById(Long id) {
-		return this.announceRepository.findOne(id);
+		Announce announce = this.announceRepository.findOne(id);
+		this.format(announce);
+		return announce;
 	}
 
 	@Override
 	public Page<Comment> addComment(Comment comment) {
-		
+
 		return this.commentService.addAndSearch(comment);
-		
+
 	}
 
 }

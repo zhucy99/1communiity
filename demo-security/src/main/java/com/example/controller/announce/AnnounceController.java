@@ -21,6 +21,7 @@ import com.example.entity.SysUser;
 import com.example.entity.announce.Announce;
 import com.example.service.imp.CommentServiceImp;
 import com.example.service.imp.announce.AnnounceServiceImp;
+import com.example.util.Others;
 
 @Controller
 @RequestMapping(value = "/announce")
@@ -37,9 +38,12 @@ public class AnnounceController {
 	@RequestMapping(value = "/search", method = { RequestMethod.GET })
 	public @ResponseBody Page<Announce> searchByName(@ModelAttribute("announce") Announce announce,
 			@RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "size", defaultValue = "10") int size, HttpServletRequest request) {
-		SysUser user = (SysUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		announce.setAuthor(user);
+			@RequestParam(value = "size", defaultValue = "10") int size,
+			@RequestParam(value = "showAll", defaultValue = "false", required= false) boolean showAll, HttpServletRequest request) {
+		if(!showAll) {
+			announce.setAuthor(Others.getCurrentUser());
+		}
+		
 		Page<Announce> announces = announceService.findSearch(announce, page, size);
 		return announces;
 	}

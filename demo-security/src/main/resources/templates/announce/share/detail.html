@@ -67,7 +67,7 @@ div.comment {
 			<div id="contact" class="right col-md-3">
 				<span class="mb-5"><label th:text="#{publisher}"></label>:<span
 					v-if="datas.author!=null">{{datas.author.username}}</span></span>&nbsp;|&nbsp;
-				<span class="mb-5"><label th:text="#{publishTime}"></label>:<span>{{datas.createTime}}</span></span>
+				<span class="mb-5"><label th:text="#{publishTime}"></label>:<span>{{datas.createTimeStr}}</span></span>
 			</div>
 
 		</div>
@@ -79,7 +79,7 @@ div.comment {
 			<hr>
 			<div id="contact" class="right col-md-3" v-if="datas.author!=null">
 				<span class="mb-5"><label th:text="#{commentator}"></label>:{{comment.author.username}}</span>&nbsp;|&nbsp;
-				<span class="mb-5"><label th:text="#{commentTime}"></label>:{{comment.createTime}}</span>
+				<span class="mb-5"><label th:text="#{commentTime}"></label>:{{comment.createTimeStr}}</span>
 			</div>
 		</div>
 	</div>

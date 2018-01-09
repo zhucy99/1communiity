@@ -8,7 +8,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 public class LocalConfig {
 	@Bean(name = "localeResolver")
-	public LocaleResolver localeResolverBean() {
+	public SessionLocaleResolver localeResolverBean() {
 		return new SessionLocaleResolver();
 	}
 	// @Bean(name="messageSource")

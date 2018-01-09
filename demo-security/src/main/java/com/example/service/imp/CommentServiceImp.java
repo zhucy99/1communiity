@@ -1,5 +1,6 @@
 package com.example.service.imp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.RequestContext;
 
 import com.example.entity.Comment;
 import com.example.entity.SysUser;
@@ -23,6 +25,8 @@ import com.example.entity.announce.Announce;
 import com.example.repository.CommentRepository;
 import com.example.service.CommentService;
 import com.example.util.Others;
+import com.example.util.enums.AnnounceStatus;
+import com.example.util.enums.AnnounceType;
 
 @Service
 public class CommentServiceImp implements CommentService {
@@ -59,7 +63,7 @@ public class CommentServiceImp implements CommentService {
 			}
 
 		}, pageable);
-
+		format(result.getContent());
 		return result;
 	}
 
@@ -94,6 +98,15 @@ public class CommentServiceImp implements CommentService {
 	public Page<Comment> addAndSearch(Comment comment) {
 		this.add(comment);
 		return this.findSearch(comment, 1, 5);
+	}
+	
+	private void format(List<Comment> comments) {
+		
+		RequestContext requestContext = new RequestContext(request);
+		for(Comment comment:comments) {
+			SimpleDateFormat dt = new SimpleDateFormat(requestContext.getMessage("dateFormat"));
+			comment.setCreateTimeStr(dt.format(comment.getCreateTime()));
+		}
 	}
 
 }

@@ -3,10 +3,10 @@ function find(page) {
 		page=1;
 	}
 	$.get("/user/search", {
-		username : um.search,
+		username : list.search,
 		page:page
 	}, function(data) {
-		um.datas = data;
+		list.datas = data;
 		pager.datas = data;
 		pager.currentPage = page;
 		$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -22,7 +22,7 @@ function deleteUser(id) {
 		id : id,
 		page : pager.currentPage
 	}, function(data) {
-		um.datas = data;
+		list.datas = data;
 		pager.datas = data;
 	});
 }
@@ -30,14 +30,14 @@ function deleteUser(id) {
 function add() {
 
 	$.get("/user/all", function(data) {
-		um.datas = data;
+		list.datas = data;
 
 	});
 }
 
 
-var um = new Vue({
-	el : '#userManage',
+var list = new Vue({
+	el : '#list_',
 	data : {
 		message : 'User list',
 		datas : '',

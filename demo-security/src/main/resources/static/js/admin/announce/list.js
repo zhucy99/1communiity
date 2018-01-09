@@ -18,6 +18,7 @@ function find(page) {
 	}
 	$.get("/announce/search", {
 		title : am.search,
+		showAll:true,
 		page:page
 	}, function(data) {
 		am.datas = data;
@@ -31,9 +32,9 @@ function announceManageFind(){
 	find();
 }
 
-function deleteAnnounce(id) {
+function deleteAnnounce() {
 	$.get("/announce/delete", {
-		id : id,
+		id : am.toDelete,
 		page : pager.currentPage
 	}, function(data) {
 		am.datas = data;
@@ -45,13 +46,19 @@ var am = new Vue({
 	el : '#announceManage',
 	data : {
 		datas : '',
-		search: ''
+		search: '',
+		toDelete:''
 	},
+	methods: {
+	    toDeleteF: function (id) {
+	    	this.toDelete=id;
+	    }
+	  },
 	filters: {
         formatDate(time) {
         }
     }
 })
 
-window.onload="find()";
+find();
 

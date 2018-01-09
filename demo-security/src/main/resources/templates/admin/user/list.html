@@ -1,0 +1,109 @@
+
+<style type="text/css">
+.col-md-12 {
+	padding-bottom: 5px;
+}
+
+.table th, .table td {
+	padding: 0.5rem;
+}
+
+.btn {
+	padding: 0.25rem 0.75rem 0.25rem;
+	height: 2.4rem;
+}
+
+#myModal {
+	opacity: 1;
+}
+
+.fade.show {
+	opacity: 0.5;
+}
+</style>
+<div class="py-0" id="list" name="content">
+	<div class="container content" id="list_">
+
+
+
+
+		<!-- Trigger the modal with a button 
+	<h2>Modal Example</h2>
+  
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Warning</button>
+-->
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Modal Header</h4>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure to delete this user?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<span class="lead w-25" th:text="#{userList}"></span>
+				<!-- 
+				<button type="submit" class="btn btn-primary" style="float: right">+</button>
+				<span style="float: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				 -->
+				<button type="submit" class="btn btn-primary" style="float: right"
+					onclick="find()" th:text="#{search}"></button>
+				<input class=" mr-2 w-25 ml-auto form-control" type="text"
+					th:placeholder="#{username}" style="float: right" v-model="search">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th th:text="#{username}">User name</th>
+							<th th:text="#{adress}">Adress</th>
+							<th th:text="#{mail}">E-Mail</th>
+							<th th:text="#{phone}">Telephone</th>
+							<th th:text="#{operation}">Traitement</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="user in datas.content">
+							<td>{{user.id}}</td>
+							<td>{{user.username}}</td>
+							<td>{{user.adress}}</td>
+							<td>{{user.mail}}</td>
+							<td>{{user.telephone}}</td>
+							<td>
+								<!-- 
+							<a v-bind:href="'javascript:deleteUser('+user.id+')'"  th:text="#{delete}"></a>/
+							<a v-bind:href="'javascript:deleteUser('+user.id+')'"  th:text="#{edit}"></a>/ -->
+								<a v-bind:href="'javascript:showUserDetail('+user.id+')'"
+								th:text="#{detail}"></a>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:replace="common/pageBar"></div>
+</div>
+
+
+<script type="text/javascript" th:src="@{/js/admin/user/list.js}"></script>

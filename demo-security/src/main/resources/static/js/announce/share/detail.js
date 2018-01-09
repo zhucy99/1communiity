@@ -7,11 +7,11 @@ function find(page){
 }
 
 function showDetail() {
-	
 	$.get("/share/findById", {
 		id : $("#id").val()
 	}, function(data) {
 		detail.datas = data;
+		console.log(data.createTimeStr);
 		if (data.author.username == $("#username").val()) {
 			detail.editable = true;
 		}

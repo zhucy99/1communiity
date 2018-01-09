@@ -1,3 +1,7 @@
+function showAddAnnounce() {
+	 window.location.href = '/share?content=add';
+}
+
 function find(page) {
 	if (page == null) {
 		page = 1;

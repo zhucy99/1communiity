@@ -4,12 +4,15 @@
 span.nav-link {
 	color: white;
 }
+body > nav {
+background-color:#292b2c !important;
+}
 </style>
 <nav class="navbar navbar-expand-md bg-secondary navbar-dark"
 	th:fragment="navbar">
 	<div class="container" id="navbar">
 		<a class="navbar-brand" th:href="@{/}"><i
-			class="fa fa-home fa-home"  th:text="' '+#{navbar.title}"></i></a>
+			class="fa fa-home fa-home" th:text="' '+#{navbar.title}"></i></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -20,31 +23,45 @@ span.nav-link {
 			<ul class="navbar-nav mr-auto">
 
 
-				<li class="nav-item" sec:authorize="!hasRole('ROLE_USER')"><a th:text="#{login}"
-					class="nav-link" th:href="@{/login}"></a></li>
-				<li class="nav-item" sec:authorize="!hasRole('ROLE_USER')"><a th:text="#{signUp}"
-					class="nav-link" th:href="@{/signup}"></a></li>
+				<li class="nav-item" sec:authorize="!hasRole('ROLE_USER')"><a
+					th:text="#{login}" class="nav-link" th:href="@{/login}"></a></li>
+				<li class="nav-item" sec:authorize="!hasRole('ROLE_USER')"><a
+					th:text="#{signUp}" class="nav-link" th:href="@{/signup}"></a></li>
 				<li class="nav-item" sec:authorize="hasRole('ROLE_USER')"><a
-					class="nav-link" th:text="#{navbar.myCircle}" th:href="@{http://www.google.com}"></a></li>
-				
+					class="nav-link" th:text="#{navbar.myCircle}"
+					th:href="@{/language}"></a></li>
+				<li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+					<div class="btn-group">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+							th:text="#{changeLanguage}"> Dropdown </a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" th:href="@{/changeLanguage?code=fr}"
+								th:text="#{french}">Action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" th:href="@{/changeLanguage?code=cn}"
+								th:text="#{chinese}">Separated link</a>
+						</div>
+					</div>
+				</li>
+
 
 			</ul>
 			<span class="nav-link"
 				th:if="${#httpServletRequest.getUserPrincipal()} != null"
 				th:text="#{navbar.welcome}+'&nbsp;&nbsp;'+${#httpServletRequest.getUserPrincipal()?.getName()}"></span>
-				
-			<a sec:authorize="hasRole('ROLE_USER')" class="nav-link" th:text="#{navbar.myAccount}"
-				th:href="@{/myAccount}"></a>
-				
-			<a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" th:text="#{navbar.admin}"
-				th:href="@{/admin}"></a>
-				
-			
+
+			<a sec:authorize="hasRole('ROLE_USER')" class="nav-link"
+				th:text="#{navbar.myAccount}" th:href="@{/myAccount}"></a> <a
+				sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link"
+				th:text="#{navbar.admin}" th:href="@{/admin}"></a>
+
+
 
 			<form id="logoutForm" class="form-inline m-0"
 				sec:authorize="hasRole('ROLE_USER')" th:action="@{/logout}"
 				method="post">
-				<a class="nav-link" href="javascript:logout();" th:text="#{navbar.logout}"></a>
+				<a class="nav-link" href="javascript:logout();"
+					th:text="#{navbar.logout}"></a>
 			</form>
 		</div>
 	</div>

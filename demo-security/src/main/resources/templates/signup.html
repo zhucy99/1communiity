@@ -12,6 +12,13 @@ body > div:nth-child(6) > div > div > div.col-md-6 > div {
 img#captcha {
     height: 25px;
 }
+.py-5{
+	background-image: url('/img/login_bg.jpg');
+}
+.signup-desc {
+    margin-top: 150px;
+    color: white;
+}
 </style>
 <body>
 	<nav th:replace="common/navbar"></nav>
@@ -19,11 +26,10 @@ img#captcha {
 	<div class="py-5">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3"></div>
+				<div class="col-md-6 signup-desc"><h1 class="mb-4" th:text="#{signUp.title}"></h1></div>
 				<div class="col-md-6">
 					<div class="card text-white p-5 bg-primary">
 						<div class="card-body" id="signup">
-							<h1 class="mb-4" th:text="#{signUp.title}"></h1>
 							<form role="form" name="form" id="signupform"
 								@submit.prevent="onSubmit" th:action="@{/signup/create}"
 								method="post">

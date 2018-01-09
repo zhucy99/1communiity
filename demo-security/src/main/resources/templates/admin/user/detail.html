@@ -1,0 +1,102 @@
+
+<style type="text/css">
+.col-md-12 {
+	padding-bottom: 5px;
+}
+
+.table th, .table td {
+	padding: 0.5rem;
+}
+
+.btn {
+	padding: 0.25rem 0.75rem 0.25rem;
+	height: 2.4rem;
+}
+</style>
+
+<div class="py-0" id="detail" name="content" style="display: none">
+	<div class="container content">
+		<div class="row">
+			<div class="col-md-12">
+				<span class="lead w-25" th:text="#{userDetail}"></span>
+
+				<button type="submit" class="btn btn-primary" style="float: right"
+					th:text="#{edit}"></button>
+				<span style="float: right">&nbsp;</span>
+				<button type="submit" class="btn btn-primary" style="float: right"
+					onclick="back()" th:text="#{return}"></button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<hr>
+				<div class="row">
+					<div class="col-md-6">
+						<form role="form" name="form" id="addAnnounceForm"
+							th:action="@{/share/add}" method="post">
+							<div class="card-body">
+
+								<div class="form-group">
+									<label th:text="#{username}"></label> <input type="text"
+										class="form-control" name="title" v-form-ctrl required
+										v-model="datas.username" disabled />
+								</div>
+								<div class="form-group">
+									<label th:text="#{mail}"></label> <input type="text"
+										class="form-control" name="title" v-form-ctrl required
+										v-model="datas.mail" disabled />
+								</div>
+								<div class="form-group">
+									<label th:text="#{adress}"></label> <input type="text"
+										class="form-control" name="title" v-form-ctrl required
+										v-model="datas.adress" disabled />
+								</div>
+								<div class="form-group">
+									<label th:text="#{phone}"></label> <input type="text"
+										class="form-control" name="title" v-form-ctrl required
+										v-model="datas.telephone" disabled />
+								</div>
+								<div class="form-group">
+									<label th:text="#{wechat}"></label> <input type="text"
+										class="form-control" name="title" v-form-ctrl required
+										v-model="datas.wechat" disabled />
+								</div>
+
+							</div>
+						</form>
+					</div>
+					<div class="col-md-6">
+						<br>
+						<div class="card-body">
+							<div class="row">
+								<div class="p-0 col-md-4 col-6">
+									<img th:src="@{/img/no-image.png}" class="img-fluid">
+								</div>
+								<div class="col-md-4 col-6 p-0">
+									<img th:src="@{/img/no-image.png}" class="img-fluid">
+								</div>
+								<div class="col-md-4 col-6 p-0">
+									<img th:src="@{/img/no-image.png}" class="img-fluid">
+								</div>
+								<div class="col-md-4 col-6 p-0">
+									<img th:src="@{/img/no-image.png}" class="img-fluid">
+								</div>
+								<div class="col-md-4 col-6 p-0">
+									<img th:src="@{/img/no-image.png}" class="img-fluid">
+								</div>
+								<div class="col-md-4 col-6 p-0">
+									<img th:src="@{/img/no-image.png}" class="img-fluid">
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/admin/user/detail.js}"></script>
+

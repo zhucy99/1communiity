@@ -1,0 +1,56 @@
+<style type="text/css">
+.col-md-12 {
+    padding-bottom: 5px;
+}
+.table th, .table td {
+    padding: 0.5rem;
+}
+.btn {
+    padding: 0.25rem 0.75rem 0.25rem;
+    height: 2.4rem;
+}
+</style>
+<div class="py-0" name="content">
+	<div id="list_" class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<span class="lead w-25" th:text="#{roleList}"></span>
+				
+				<button type="submit" class="btn btn-primary" style="float: right"
+					onclick="find()" th:text="#{search}"></button>
+				<input class=" mr-2 w-25 ml-auto form-control" type="text"
+					th:placeholder="#{code}" th:title="#{code}" style="float: right" v-model="search">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th th:text="#{code}"></th>
+							<th th:text="#{name}"></th>
+							<th th:text="#{description}"></th>
+							<th th:text="#{operation}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="role in datas.content">
+							<td>{{role.id}}</td>
+							<td>{{role.name}}</td>
+							<td>{{role.nameTrad}}</td>
+							<td>{{role.descriptionTrad}}</td>
+							<td><a v-bind:href="'javascript:showUserDetail('+role.id+')'"
+								data-toggle="modal" data-target="#myModal" th:text="#{assignRole}"></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:replace="common/pageBar"></div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/admin/role/list.js}"></script>
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title></title>
+
+<!-- Bootstrap -->
+<link
+	th:href="@{/template/vendors/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet">
+<!-- Font Awesome -->
+<link
+	th:href="@{/template/vendors/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+<!-- NProgress -->
+<link th:href="@{/template/vendors/nprogress/nprogress.css}"
+	rel="stylesheet">
+<!-- Dropzone.js -->
+<link th:href="@{/template/vendors/dropzone/dist/min/dropzone.min.css}"
+	rel="stylesheet">
+
+<!-- Custom Theme Style -->
+<link th:href="@{/template/build/css/custom.min.css}" rel="stylesheet">
+</head>
+
+<style type="text/css">
+.py-5.gradient-overlay {
+	background-image: url('/img/index.jpg');
+}
+
+.card-header.bg-primary.text-white.text-center.secondHand {
+	background-color: rgba(255, 138, 0, 0.79) !important;
+}
+
+.card-header.bg-primary.text-white.text-center.question {
+	background-color: rgb(84, 228, 87) !important;
+}
+
+input.form-control.mr-2 {
+	width: initial;
+}
+</style>
+<body>
+	<nav th:replace="common/navbar"></nav>
+
+	<div class="bg-light text-dark py-3">
+		<div class="container p-2 ml-auto">
+			<div th:if="${content=='list'}">
+				<div th:replace="/announce/secondHand/list"></div>
+			</div>
+			<div th:if="${content=='add'}">
+				<div th:replace="/announce/secondHand/add"></div>
+			</div>
+			<div th:if="${content=='detail'}">
+				<div th:replace="/announce/secondHand/detail"></div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="common/foot"></div>
+
+</body>
+
+</html>

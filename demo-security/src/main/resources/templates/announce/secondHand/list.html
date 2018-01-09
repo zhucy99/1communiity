@@ -1,6 +1,3 @@
-<script type="text/javascript" th:src="@{/js/announce/announce.js}"></script>
-<script type="text/javascript" th:src="@{/js/announce/secondHand.js}"></script>
-
 <style type="text/css">
 h2,h1 {
 	color: #ff9e07;
@@ -16,44 +13,44 @@ img.img-fluid.d-block.mb-4 {
 	height: 230px;
 }
 
-#list>div>div>div {
+#list>div>div>div>div {
 	background-color: rgba(52, 58, 64, 0.4);
 	margin-bottom: 10px;
 	padding-left: 5px;
 	padding-bottom: 1px;
 }
 
-#list>div>div {
+#list>div>div>div {
 	text-align: left !important;
 	left: 0% !important;
 	padding-bottom: 10px !important;
 }
 
-#list>div {
+#list>div>div {
 	padding-right: 5px !important;
 	padding-left: 0px !important;
 }
-#list > div> img {
+#list > div>div> img {
     width: 100%;
     height: 230px;
     border: 1px solid;
     border-color: rgba(221, 221, 221, 0.31);
 }
-#list > div > div > div > h6 > b > a {
+#list > div>div > div > div > h6 > b > a {
     color: white;
 }
 </style>
 
-<div id="listPage">
+<div id="list">
 
 	<div class="row">
 		<div class="col-md-12">
-			<span class="lead w-25""><h2>
+			<span class="lead w-25"><h2>
 					<b th:text="#{secondHand}"></b>
 				</h2></span>|
 				<span class="lead w-25"><h5><a class="share" th:href="@{/share}" th:text="#{share}"></a>
 				</h5></span>&nbsp;|
-				<span class="lead w-25""><h5><a class="share" href="#" th:text="#{question}"></a>
+				<span class="lead w-25"><h5><a class="share" href="#" th:text="#{question}"></a>
 				</h5></span>
 			<button type="submit" class="btn btn-primary" style="float: right"
 				onclick="showAddAnnounce()" th:text="#{wantToPublish}">我要发布+</button>
@@ -65,7 +62,7 @@ img.img-fluid.d-block.mb-4 {
 		</div>
 	</div>
 	<hr>
-	<div class="row" id="list">
+	<div class="row">
 		<template v-for="announce in announces">
 
 		<div class="col-md-3 my-3">
@@ -80,7 +77,7 @@ img.img-fluid.d-block.mb-4 {
 					</h2>
 					&nbsp;&nbsp;
 					<h6>
-						<b><a v-bind:href="'javascript:showDetail('+announce.id+')'">{{announce.title}}</a></b>
+						<b><a v-bind:href="'/secondHand?content=detail&id='+announce.id">{{announce.title}}</a></b>
 					</h6>
 				</div>
 			</div>
@@ -88,10 +85,10 @@ img.img-fluid.d-block.mb-4 {
 		</div>
 		</template>
 	</div>
-	<div th:replace="common/pageBar"></div>
+	
 </div>
+<div th:replace="common/pageBar"></div>
 
-<script type="text/javascript">
-find();
-</script>
+<script type="text/javascript" th:src="@{/js/announce/secondHand/list.js}"></script>
+
 

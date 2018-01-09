@@ -10,21 +10,39 @@
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="nav nav-tabs" id="tabs">
-						<li class="nav-item"><a class="active nav-link"
-							href="javascript:changeTab('myProfil')" id="myProfil_tab" th:text="#{myProfil}"></a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="javascript:changeTab('announceManage')" id="announceManage_tab" th:text="#{announceManage}"></a></li>
+							th:classappend="${content=='profil'} ? active : ''"
+							th:href="@{/myAccount?content=profil}" th:text="#{myProfil}"></a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:classappend="${content=='announce'} ? active : ''"
+							th:href="@{/myAccount?content=announce}"
+							th:text="#{myAnnounces}"></a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:classappend="${content=='message'} ? active : ''"
+							th:href="@{/myAccount?content=announce}"
+							th:text="#{myMessages}"></a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:classappend="${content=='comment'} ? active : ''"
+							th:href="@{/myAccount?content=announce}"
+							th:text="#{myComments}"></a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:classappend="${content=='favorite'} ? active : ''"
+							th:href="@{/myAccount?content=announce}"
+							th:text="#{myFavorites}"></a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div th:replace="myAccount/myProfil"></div>
-	<div th:replace="myAccount/announceManage"></div>
+	<div th:if="${content=='profil'}">
+		<div th:replace="myAccount/profil/detail"></div>
+	</div>
+	<div th:if="${content=='announce'}">
+		<div th:replace="myAccount/announce/list"></div>
+	</div>
 	
-	<div th:replace="common/pageBar"></div>
-	
+
 	<div th:replace="common/foot"></div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -43,7 +61,6 @@
 		th:src="@{/js/plugins/jquery-3.2.1.min.js}"></script>
 
 	<script type="text/javascript" th:src="@{/js/home.js}"></script>
-	<script type="text/javascript" th:src="@{/js/myAccount/myAccount.js}"></script>
 	<script type="text/javascript" th:src="@{/js/plugins/vue.min.js}"></script>
 
 </body>

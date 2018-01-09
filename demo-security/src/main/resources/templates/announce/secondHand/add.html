@@ -1,13 +1,17 @@
-<script type="text/javascript" th:src="@{/js/announce/secondHand.js}"></script>
-<script type="text/javascript"
-	th:src="@{/js/plugins/ckeditor/ckeditor.js}"></script>
-
-<div id="add" style="display: none">
+<style>
+.dropzone {
+	border: 1px solid rgb(211, 211, 212) !important;
+}
+#my-awesome-dropzone > div > span {
+    color: rgba(128, 128, 128, 0.5);
+}
+</style>
+<div id="add">
 	<div class="row">
 		<div class="col-md-12">
 			<span class="lead w-25" th:text="#{secondHand}+'/'+#{sall}"></span>
-			<button type="submit" class="btn btn-primary" style="float: right"
-				onclick="addAnnounceSubmit()" th:text="#{publish}"></button>
+			<button type="submit" id="addBtn" class="btn btn-primary" style="float: right"
+				th:text="#{publish}"></button>
 			<span style="float: right">&nbsp;&nbsp;</span>
 			<button type="submit" class="btn btn-primary" style="float: right"
 				onclick="showListAnnounce()" th:text="#{return}"></button>
@@ -17,74 +21,80 @@
 	</div>
 	<hr>
 	<div class="row">
-		
-			<div class="col-md-6">
+
+		<div class="col-md-6">
 			<form role="form" name="form" id="addAnnounceForm"
-			th:action="@{/secondHand/add}" method="post"
-			enctype="multipart/form-data">
+				th:action="@{/secondHand/add}" method="post"
+				enctype="multipart/form-data">
 				<div class="card-body" id="addSecondHand">
 
 					<div class="form-group">
 						<label th:text="#{title}"></label> <input type="text"
-							class="form-control" name="title" th:placeholder="#{title}"
-							v-form-ctrl required />
+							class="form-control" th:placeholder="#{title}"
+							v-form-ctrl required v-model="title"/>
 					</div>
 					<div class="form-group">
 						<label th:text="#{price}"></label> <input type="text"
-							class="form-control" name="price" th:placeholder="#{price}"
-							v-form-ctrl required />
-					</div>
-					<div class="form-group">
-						<label th:text="#{uploadPics}"></label> <br> <input
-							class="form-control" class="btn btn-primary" type="file" multiple
-							name="file" id="file">
-
+							class="form-control" th:placeholder="#{price}"
+							v-form-ctrl required v-model="price"/>
 					</div>
 					<div class="form-group">
 						<label th:text="#{content}"></label>
 						<!-- class="ckeditor" -->
-						<textarea class="ckeditor" cols="80" name="description" rows="12"
-							v-form-ctrl required ></textarea>
+						<textarea class="ckeditor" cols="80" name="description" rows="12" 
+							v-form-ctrl required></textarea>
 
 					</div>
 
 
 				</div>
-				</form>
-			</div>
-		
-		<div class="col-md-6">
-			<br>
-			<div class="card-body">
-				<div class="row">
-					<div class="p-0 col-md-4 col-6">
-						<img th:src="@{/img/no-image.png}" class="img-fluid" >
-					</div>
-					<div class="col-md-4 col-6 p-0">
-						<img th:src="@{/img/no-image.png}" class="img-fluid" >
-					</div>
-					<div class="col-md-4 col-6 p-0">
-						<img th:src="@{/img/no-image.png}" class="img-fluid" >
-					</div>
-					<div class="col-md-4 col-6 p-0">
-						<img th:src="@{/img/no-image.png}" class="img-fluid" >
-					</div>
-					<div class="col-md-4 col-6 p-0">
-						<img th:src="@{/img/no-image.png}" class="img-fluid" >
-					</div>
-					<div class="col-md-4 col-6 p-0">
-						<img th:src="@{/img/no-image.png}" class="img-fluid" >
-					</div>
-				</div>
-				<br>
-			</div>
+			</form>
 		</div>
 
+
+		<div class="right_col col-md-6" role="main">
+			<div class="">
+
+				<div class="clearfix"></div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<br> <label th:text="#{uploadPics}"></label>
+						<!-- 
+						<form action="/secondHand/add" class="dropzone form-control"
+							id="my-awesome-dropzone">
+							<input type="text" class="form-control" name="title"
+								th:placeholder="#{title}" v-form-ctrl required
+								v-model="datas.title" />
+
+						</form> -->
+
+						<form th:action="@{/secondHand/add}" method="post"
+							class="dropzone  form-control" id="my-awesome-dropzone" enctype="multipart/form-data">
+							<input type="hidden" id="title" name="title"/> 
+							<input type="hidden" id="price" name="price"/>
+							<input type="hidden" id="description" name="description"/>
+						</form>
+						<input type="hidden" th:value="#{uploadFileMsg}" id="uploadFileMsg">
+						<input type="hidden" th:value="#{removeFile}" id="removeFile">
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 
 
 
-
 </div>
+<!-- Dropzone.js -->
+<script th:src="@{/plugins/dropzone/dropzone.js}"></script>
+
+<!-- Custom Theme Scripts -->
+<script type="text/javascript" th:src="@{/js/announce/announce.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/announce/secondHand/add.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/plugins/ckeditor/ckeditor.js}"></script>
 
 

@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Msg;
 import com.example.entity.SysUser;
 import com.example.service.imp.UserServiceImp;
+import com.example.util.Others;
 
 @Controller
 @RequestMapping(value = "/myAccount")
@@ -21,8 +23,13 @@ public class myAccountController {
 	UserServiceImp customUserService;
 
 	@RequestMapping("")
-	public String myAccount() {
-		
+	public String myAccount(@RequestParam(value = "content", defaultValue = "profil") String content,@RequestParam(value = "id", required=false) Long id, Model model) {
+		model.addAttribute("content", content);
+		if("profil".equals(content)) {
+			model.addAttribute("id", Others.getCurrentUser().getId());
+		}else {
+			model.addAttribute("id", id);
+		}
 		return "myAccount/main";
 	}
 

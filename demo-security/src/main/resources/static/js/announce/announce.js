@@ -1,9 +1,6 @@
 function addAnnounceSubmit() {
 	$("#addAnnounceForm").submit();
 }
-function showAddAnnounce() {
-	 window.location.href = '/share?content=add';
-}
 function showListAnnounce() {
 	hideAll();
 	$("#listPage").css("display", "block");
