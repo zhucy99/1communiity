@@ -58,6 +58,10 @@ public class Announce {
 	@Transient
 	private String createTimeStr;
 	private Date lastEditTime;
+	
+	@ManyToOne
+	@JsonBackReference // 避免json 的无限循环
+	private Category category;
 
 	// 用mqppedBy,避免中间表的产生
 	@OneToMany(mappedBy = "author", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
@@ -160,6 +164,13 @@ public class Announce {
 		this.comments = comments;
 	}
 	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	
 
 }

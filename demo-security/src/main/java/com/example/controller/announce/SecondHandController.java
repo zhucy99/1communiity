@@ -19,10 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.thymeleaf.util.StringUtils;
 
 import com.example.entity.SysUser;
+import com.example.entity.announce.Category;
 import com.example.entity.announce.SecondHand;
+import com.example.service.announce.CategoryService;
 import com.example.service.imp.announce.SecondHandServiceImp;
+import com.example.util.enums.AnnounceCat;
 
 @Controller
 @RequestMapping(value = "/secondHand")
@@ -31,13 +35,24 @@ public class SecondHandController {
 
 	@Autowired
 	SecondHandServiceImp secondHandService;
-
+	
+	@Autowired
+	CategoryService categoryService;
 
 	@RequestMapping(value = "")
-	public String secondHand(@RequestParam(value = "content", defaultValue = "list") String content,@RequestParam(value = "id", required=false) Long id, Model model) {
+	public String secondHand(@RequestParam(value = "content", defaultValue = "list") String content,@RequestParam(value = "id", required=false) Long id, Model model,HttpServletRequest request) {
+		 String url = request.getRequestURI();
+		model.addAttribute("lasturl", url);
 		model.addAttribute("content", content);
 		model.addAttribute("id", id);
-		return "announce/secondHand/main";
+		if(StringUtils.isEmpty(content)) {
+			content="list";
+		}
+		if("list".equals(content)) {
+			List<Category> catList = this.categoryService.findByParentCode(AnnounceCat.secondHand.getCode());
+			model.addAttribute("categories", catList);
+		}
+		return "announce/secondHand/"+content;
 	}
 
 	@RequestMapping(value = "/add", method = { RequestMethod.POST })

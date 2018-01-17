@@ -1,23 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="common/head"></head>
+
+<!-- NProgress -->
+<link th:href="@{/plugins/dropzone/dropzone.css}" rel="stylesheet">
+
 <style type="text/css">
-h2,h1 {
+.py-5.gradient-overlay {
+	background-image: url('/img/index.jpg');
+}
+
+.card-header.bg-primary.text-white.text-center.secondHand {
+	background-color: rgba(255, 138, 0, 0.79) !important;
+}
+
+.card-header.bg-primary.text-white.text-center.question {
+	background-color: rgb(84, 228, 87) !important;
+}
+
+input.form-control.mr-2 {
+	width: initial;
+}
+
+h2, h1 {
 	color: #ff9e07;
 	display: inline;
 }
-h5{
+
+h5 {
 	display: inline;
 	color: #868e96;
-}
-
-img.img-fluid.d-block.mb-4 {
-	width: 100%;
-	height: 230px;
-}
-
-#list>div>div>div>div {
-	background-color: rgba(52, 58, 64, 0.4);
-	margin-bottom: 10px;
-	padding-left: 5px;
-	padding-bottom: 1px;
 }
 
 #list>div>div>div {
@@ -30,65 +42,159 @@ img.img-fluid.d-block.mb-4 {
 	padding-right: 5px !important;
 	padding-left: 0px !important;
 }
-#list > div>div> img {
-    width: 100%;
-    height: 230px;
-    border: 1px solid;
-    border-color: rgba(221, 221, 221, 0.31);
+
+#list>div>div>img {
+	height: 230px;
+	border: 1px solid;
+	border-color: rgba(221, 221, 221, 0.5);
 }
-#list > div>div > div > div > h6 > b > a {
-    color: white;
+
+#list>div>div>div>div>h6>b>a {
+	color: white;
 }
+
+.leftnavbar {
+	background-color: rgba(52, 58, 64, 0.11);
+}
+.list-imgdiv{
+    height: 200px;
+    overflow: hidden;
+}
+
+.list-img{
+	width: 100%;
+}
+
+.border-left-0 {
+    background-color: rgba(0, 123, 255, 0.09);
+}
+
 </style>
+<body>
+	<nav th:replace="common/navbar"></nav>
 
-<div id="list">
+	<div class="bg-light text-dark py-3">
+		<div class="container p-2 ml-auto">
+			<div class="row" id="search">
+				<div class="col-md-12">
 
-	<div class="row">
-		<div class="col-md-12">
-			<span class="lead w-25"><h2>
-					<b th:text="#{secondHand}"></b>
-				</h2></span>|
-				<span class="lead w-25"><h5><a class="share" th:href="@{/share}" th:text="#{share}"></a>
-				</h5></span>&nbsp;|
-				<span class="lead w-25"><h5><a class="share" href="#" th:text="#{question}"></a>
-				</h5></span>
-			<button type="submit" class="btn btn-primary" style="float: right"
-				onclick="showAddAnnounce()" th:text="#{wantToPublish}">我要发布+</button>
-			<span style="float: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<button type="submit" class="btn btn-primary" style="float: right"
-				onclick="find()">Search</button>
-			<input class="form-control mr-2" type="text" placeholder="Title"
-				style="float: right" v-model="search">
-		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<template v-for="announce in announces">
+					<span class="lead w-25"><h2>
+							<b th:text="#{secondHand}"></b>
+						</h2></span>| <span class="lead w-25"><h5>
+							<a class="share" th:href="@{/share}" th:text="#{share}"></a>
+						</h5></span>&nbsp;| <span class="lead w-25"><h5>
+							<a class="share" href="#" th:text="#{question}"></a>
+						</h5></span>
+					<button type="submit" class="btn btn-primary" style="float: right"
+						onclick="showAddAnnounce()" th:text="#{wantToPublish}">我要发布+</button>
+					<span style="float: right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
-		<div class="col-md-3 my-3">
-			<img v-if="announce.pictures.length==0"
-				class="img-fluid d-block mb-4" th:src="@{/img/secondHand.jpg}">
-			<img v-else class="img-fluid d-block mb-4"
-				:src="'/userImg/'+announce.pictures[0].fileName">
-			<div class="carousel-caption">
-				<div>
-					<h2>
-						<b>{{announce.price}}&nbsp;€</b>
-					</h2>
-					&nbsp;&nbsp;
-					<h6>
-						<b><a v-bind:href="'/secondHand?content=detail&id='+announce.id">{{announce.title}}</a></b>
-					</h6>
+					<button type="submit" class="btn btn-primary" style="float: right"
+						onclick="find()" th:text="#{search}">Search</button>
+
+					<input class="form-control mr-2" type="text"
+						th:placeholder="#{title}" style="float: right" v-model="title">
 				</div>
 			</div>
-			<!-- <p class="mt-1">{{announce.description}}</p> -->
+			<hr>
+			<div class="row">
+				<div class="col-md-3 leftnavbar">
+					<ul class="nav flex-column"  th:each="cat : ${categories}">
+						<li class="nav-item"><a class="nav-link active" href="#" th:text="#{${cat.code}}">Active</a>
+						</li>
+						<div class="dropdown-divider"></div>
+						
+					</ul>
+				</div>
+				<!-- 
+				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+						<div class="dropdown-divider"></div>
+						<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+						<div class="dropdown-divider"></div>
+						<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
+						</li>
+				 -->
+				<div class="col-md-9 pl-5">
+					<div id="list">
+
+
+
+						<div class="row">
+							<template v-for="announce in announces">
+							<div class="col-md-3 my-3">
+								<div class="card">
+									<div class=" list-imgdiv vcenter">
+											<img v-if="announce.pictures.length==0"
+												class="list-img"
+												th:src="@{/img/secondHand.jpg}"> <img v-else
+												class="list-img"
+												:src="'/userImg/'+announce.pictures[0].fileName">
+									</div>
+									<div class="card-body border border-bottom-0  border-left-0  border-right-0">
+										<h5>
+											<span class="mt-1">{{announce.price}}&nbsp;€</span> <b><a
+												v-bind:href="'/secondHand?content=detail&id='+announce.id">{{announce.title}}</a></b>
+										</h5>
+									</div>
+								</div>
+							</div>
+							</template>
+							<!-- 
+							<template v-for="announce in announces">
+
+							<div class="col-md-3 my-2">
+								<img v-if="announce.pictures.length==0"
+									class="img-responsive center-block"
+									th:src="@{/img/secondHand.jpg}"> <img v-else
+									class="img-responsive center-block"
+									:src="'/userImg/'+announce.pictures[0].fileName">
+								<div class="carousel-caption">
+									<div>
+										<h2>
+											<b class="text-white">{{announce.price}}&nbsp;€</b>
+										</h2>
+										&nbsp;&nbsp;
+										<h6>
+											<b><a
+												v-bind:href="'/secondHand?content=detail&id='+announce.id">{{announce.title}}</a></b>
+										</h6>
+									</div>
+								</div>
+							</div>
+							</template>
+							 -->
+
+						</div>
+
+					</div>
+					<div th:replace="common/pageBar"></div>
+				</div>
+			</div>
+
+
+
 		</div>
-		</template>
 	</div>
-	
-</div>
-<div th:replace="common/pageBar"></div>
+	<div th:replace="common/foot"></div>
+	<script type="text/javascript"
+		th:src="@{/js/announce/secondHand/list.js}"></script>
+	<script th:src="@{/plugins/dropzone/dropzone.js}"></script>
 
-<script type="text/javascript" th:src="@{/js/announce/secondHand/list.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/announce/announce.js}"></script>
 
+</body>
 
+</html>

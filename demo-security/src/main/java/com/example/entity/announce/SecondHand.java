@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.example.entity.Category;
 import com.example.entity.Picture;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,9 +29,7 @@ public class SecondHand extends Announce{
 	@JsonManagedReference // 避免json 的无限循环
 	private List<Picture> pictures;
 
-	@ManyToOne
-	@JsonBackReference // 避免json 的无限循环
-	private Category category;
+	
 	
 	private double price;
 
@@ -51,14 +48,5 @@ public class SecondHand extends Announce{
 	public void setPictures(List<Picture> pictures) {
 		this.pictures = pictures;
 	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
 
 }

@@ -1,9 +1,8 @@
 function addAnnounceSubmit() {
 	$("#addAnnounceForm").submit();
 }
-function showListAnnounce() {
-	hideAll();
-	$("#listPage").css("display", "block");
+function returnLastURL(url) {
+	document.location.href=url;
 }
 function showDetailAnnounce() {
 	hideAll();

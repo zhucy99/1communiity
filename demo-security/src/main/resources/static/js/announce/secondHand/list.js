@@ -7,7 +7,7 @@ function find(page) {
 		page = 1;
 	}
 	$.get("/secondHand/search", {
-		title : announcesList.search,
+		title : search.title,
 		page : page
 	}, function(data) {
 		announcesList.announces = data.content;
@@ -22,6 +22,13 @@ var announcesList = new Vue({
 		announces : '',
 		search : '',
 		test : 12
+	}
+});
+
+var search = new Vue({
+	el : '#search',
+	data : {
+		title : ''
 	}
 });
 

@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<!-- Font Awesome -->
-<link th:href="@{/template/font-awesome/css/font-awesome.min.css}"
-	rel="stylesheet">
-<!-- NProgress -->
-<link th:href="@{/template/vendors/nprogress/nprogress.css}"
-	rel="stylesheet">
-<!-- Dropzone.js -->
-<link th:href="@{/template/dropzone/dist/min/dropzone.min.css}"
-	rel="stylesheet">
-
-<!-- Custom Theme Style -->
-<link th:href="@{/template/build/css/custom.min.css}" rel="stylesheet">
-
+<head th:replace="common/head"></head>
 <style type="text/css">
 .py-5.gradient-overlay {
 	background-image: url('/img/index.jpg');
@@ -31,23 +18,18 @@ img.secondHandImg {
 	width: 100%;
 	height: 230px;
 }
-
-a#userManage_tab {
-	background-color: #ffa336;
-	font-size: medium;
-	color: white;
-}
-
-span.nav-link {
-	color: white;
-}
 </style>
-<body>
+<link  th:href="@{/plugins/cropper/cropper.css}" rel="stylesheet">
+<script type="text/javascript"
+	th:src="@{/plugins/jquery-3.2.1.js}"></script>
+<script th:src="@{/plugins/cropper/cropper.js}"></script>
 
-	<nav th:include="common/navbar"></nav>
+<body>
+	<nav th:replace="common/navbar"></nav>
 
 	<div class="py-5 gradient-overlay">
 		<div class="container py-5">
+		<img id="test" th:src="@{/img/no-image.png}">
 			<div class="row">
 				<div class="col-md-3 text-white">
 					<img class="img-fluid d-block mx-auto mb-5"
@@ -61,11 +43,14 @@ span.nav-link {
 						grid system.&nbsp; <br>
 					</p>
 					<a href="#" class="btn btn-lg mx-1 btn-secondary"
-						th:text="#{secondHand}"></a> <a href="#"
+						th:text="#{secondHand}" th:href="@{/secondHand}"></a> 
+					<a href="#"
 						class="btn btn-lg btn-primary mx-1" th:text="#{serviceTrading}"
-						th:href="@{/secondHand}"></a> <a href="#"
+						th:href="@{/secondHand}"></a> 
+					<a href="#"
 						class="btn btn-lg btn-primary mx-1" th:text="#{share}"
-						th:href="@{/secondHand}"></a> <a href="#"
+						th:href="@{/secondHand}"></a>
+					<a href="#"
 						class="btn btn-lg btn-primary mx-1" th:text="#{question}"
 						th:href="@{/secondHand}"></a>
 				</div>
@@ -75,44 +60,38 @@ span.nav-link {
 	<div class="bg-light text-dark py-3">
 		<div class="container p-2 ml-auto">
 			<div class="row">
-				<div class="col-md-12">
-					<ul class="nav nav-tabs" id="tabs">
-						<li class="nav-item"><b><a class="nav-link active"
-								id="userManage_tab" th:text="#{secondHand}"></a></b></li>
-						<li><a th:href="@{/secondHand}" class="card-link"><span
-								class="glyphicon glyphicon-chevron-right"
-								th:text="#{index.more}" aria-hidden="true"></span></a></li>
-					</ul>
-
+				<div class="col-md-3 my-3">
+					<div class="card">
+						<div
+							class="card-header bg-primary text-white text-center secondHand"
+							th:text="#{secondHand}"></div>
+						<img class="img-fluid"
+							src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg"
+							alt="Card image">
+						<div class="card-body">
+							<h6 class="card-subtitle text-muted">Support card subtitle</h6>
+							<p class="card-text p-y-1">Some quick example text to build
+								on the card title .</p>
+							<a th:href="@{/secondHand}" class="card-link"
+								th:text="#{index.more}"></a>
+						</div>
+					</div>
 				</div>
-			</div>
-			<br>
-			<div class="row">
+				<div class="col-md-3 my-3" th:each="secondHand : ${secondHands}">
+					<div class="card">
 
-				<div class="col-md-3 col-xs-12 widget widget_tally_box"
-					th:each="secondHand : ${secondHands}">
-					<div class="x_panel ui-ribbon-container fixed_height_390">
-						<div class="ui-ribbon-wrapper">
-							<div class="ui-ribbon" th:text="${secondHand.price}+' €'"></div>
-						</div>
-						<div class="x_title">
-							<h3>User Mail</h3>
-							<div class="clearfix"></div>
-						</div>
-						<div class="x_content">
-
-							<div style="text-align: center; margin-bottom: 17px">
-								<img th:if="${secondHand.pictures.size()!=0}"
-									class="img-fluid d-block mb-4 secondHandImg"
-									th:src="'/userImg/'+${secondHand.pictures[0].fileName}">
-								<img th:if="${secondHand.pictures.size()==0}"
-									class="img-fluid d-block mb-4 secondHandImg"
-									th:src="@{/img/secondHand.jpg}">
-							</div>
-							<div class="divider"></div>
-							<h3 class="name_title" th:text="${secondHand.title}">Finance</h3>
-
-
+						<img th:if="${secondHand.pictures.size()!=0}"
+							class="img-fluid d-block mb-4 secondHandImg"
+							th:src="'/userImg/'+${secondHand.pictures[0].fileName}"> <img
+							th:if="${secondHand.pictures.size()==0}"
+							class="img-fluid d-block mb-4 secondHandImg"
+							th:src="@{/img/secondHand.jpg}">
+						<div class="card-body">
+							<h5>
+								<span class="mt-1" th:text="${secondHand.price}+' € | '"></span><b
+									th:text="${secondHand.title}"></b>
+							</h5>
+							<p th:text="${secondHand.description}"></p>
 						</div>
 					</div>
 				</div>
@@ -217,38 +196,33 @@ span.nav-link {
 					<p class="mt-1">Just quality vanilla Bootstrap 4 code. No messy
 						dependencies. For nerds peace of mind.</p>
 				</div>
-
-
 			</div>
 		</div>
 	</div>
 	<div th:replace="common/foot"></div>
 
-<link th:href="@{template/vendors/bootstrap/dist/css/bootstrap.min.css}"
-	rel="stylesheet">
-	<!-- jQuery -->
-	<script th:src="@{/template/vendors/jquery/dist/jquery.min.js}"></script>
-	<!-- Bootstrap -->
-	<script
-		th:src="@{/template/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
-	<!-- FastClick -->
-	<script th:src="@{/template/vendors/fastclick/lib/fastclick.js}"></script>
-	<!-- NProgress -->
-	<script th:src="@{/template/vendors/nprogress/nprogress.js}"></script>
-	<!-- Chart.js -->
-	<script th:src="@{/template/vendors/Chart.js/dist/Chart.min.js}"></script>
-	<!-- jQuery Sparklines -->
-	<script
-		th:src="@{/template/vendors/jquery-sparkline/dist/jquery.sparkline.min.js}"></script>
-	<!-- easy-pie-chart -->
-	<script
-		th:src="@{/template/vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js}"></script>
-	<!-- bootstrap-progressbar -->
-	<script
-		th:src="@{/template/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
 
-	<!-- Custom Theme Scripts -->
-	<script th:src="@{/template/build/js/custom.min.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" th:src="@{/js/home.js}"></script>
+	<script>
+var test = $("#test").cropper({
+	  aspectRatio: 16 / 9,
+	  crop: function(data) {
+	    // Output the result data for cropping image.
+	  }
+	});
+console.log(test);
+</script>
 
 </body>
 

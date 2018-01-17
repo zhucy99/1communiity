@@ -1,0 +1,113 @@
+<style type="text/css">
+div#description {
+	background-color: rgba(0, 0, 0, 0.05);
+	padding: 15px;
+	min-height: 400px;
+}
+
+.content {
+	background-color: #ddd;
+}
+
+#contact {
+	display: none;
+}
+
+#carousel1>div{
+	height: 500px;
+}
+
+
+#contact>span>img {
+	width: 20px;
+}
+
+#list>div {
+	margin-top: 0rem !important;
+	margin-bottom: 0rem !important;
+}
+</style>
+
+<input type="hidden" id="id" th:value="${id}">
+<div id="detail">
+	<div class="row">
+		<div class="col-md-12">
+			<input type="hidden"
+				th:value="${#httpServletRequest.getUserPrincipal()?.getName()}"
+				id="username"> <span class="lead w-25"
+				th:text="#{secondHand}+'/'+#{buy}"></span>
+			<button v-if="editable" type="submit" class="btn btn-primary"
+				style="float: right" onclick="addAnnounceSubmit()"
+				th:text="#{offShelves}"></button>
+			<span style="float: right">&nbsp;&nbsp;</span>
+			<button v-if="editable" type="submit" class="btn btn-primary"
+				style="float: right" onclick="addAnnounceSubmit()" th:text="#{edit}"></button>
+			<span style="float: right">&nbsp;&nbsp;</span>
+			<button type="submit" class="btn btn-primary" style="float: right"
+				th:onclick="'returnLastURL(\''+${lasturl}+'\')'" th:text="#{return}"></button>
+
+		</div>
+	</div>
+	<hr>
+
+	<div class="row content">
+
+		<div class="col-md-8 p-0">
+			<div id="carousel1" class="carousel slide" data-ride="carousel">
+				<div class="carousel-inner" role="listbox">
+
+					<template v-for="(pic,index) in datas.pictures">
+					<div v-bind:class="[index==0 ? 'carousel-item active' : 'carousel-item']">
+						<img :src="'/userImg/'+pic.fileName"
+							class="d-block img-fluid w-100">
+						<div class="carousel-caption">
+							<h3>Dining room</h3>
+							<p>Good architecture, better food</p>
+						</div>
+					</div>
+					</template>
+
+				</div>
+				<a class="carousel-control-prev" href="#carousel1" role="button"
+					data-slide="prev"> <span class="carousel-control-prev-icon"
+					aria-hidden="true"></span> <span class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next" href="#carousel1" role="button"
+					data-slide="next"> <span class="carousel-control-next-icon"
+					aria-hidden="true"></span> <span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+		<div class="p-5 col-md-4">
+			<h1 class="mb-4">{{datas.price}}€&nbsp;</h1>
+			<hr>
+			<a class="btn btn-lg btn-outline-light"
+				href="javascript:showContact();" th:text="#{viewContact}"
+				style="color: black"></a><br> <br>
+			<div id="contact" v-if="datas.author!=null">
+				<span class="mb-5" th:alt="#{contactPerson}"><img
+					th:src="@{/img/contactor.png}">&nbsp;&nbsp;{{datas.author.username}}</span><br>
+				<span class="mb-5" th:alt="#{phone}"><img
+					th:src="@{/img/phone.png}">&nbsp;&nbsp;{{datas.author.telephone}}</span><br>
+				<span class="mb-5" th:alt="#{wechat}"><img
+					th:src="@{/img/wechat.png}">&nbsp;&nbsp;{{datas.author.wechat}}</span>
+			</div>
+
+		</div>
+	</div>
+	<br>
+	<div class="row  content">
+		<div class="align-self-center p-5 col-md-12">
+
+			<h1 class="mb-4">{{datas.title}}</h1>
+			<hr>
+			<p class="mb-5" v-html="datas.description"></p>
+
+		</div>
+
+	</div>
+
+</div>
+<script type="text/javascript"
+	th:src="@{/js/announce/secondHand/detail.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/plugins/ckeditor/ckeditor.js}"></script>

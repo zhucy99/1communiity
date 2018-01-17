@@ -1,0 +1,108 @@
+<style>
+.dropzone {
+	border: 1px solid rgb(211, 211, 212) !important;
+}
+
+#my-awesome-dropzone>div>span {
+	color: rgba(128, 128, 128, 0.5);
+}
+
+button.input-close {
+	position: relative;
+	bottom: 32px;
+	right: 7px;
+}
+</style>
+<div id="add">
+	<div class="row">
+		<div class="col-md-12">
+			<span class="lead w-25" th:text="#{secondHand}+'/'+#{sall}"></span>
+			<button type="submit" id="addBtn" class="btn btn-primary"
+				style="float: right" th:text="#{publish}"></button>
+			<span style="float: right">&nbsp;&nbsp;</span>
+			<button type="submit" class="btn btn-primary" style="float: right"
+				th:onclick="'returnLastURL(\''+${lasturl}+'\')'" th:text="#{return}"></button>
+
+		</div>
+	</div>
+	<hr>
+
+	<div class="row">
+
+		<div class="col-md-6">
+			<form role="form" name="form" id="tempsForm">
+				<div class="card-body" id="addSecondHand">
+
+					<div class="form-group">
+						<label th:text="#{title}"></label> <input id="title_" type="text"
+							class="form-control" th:placeholder="#{required}" v-model="title" />
+						<button type="button" class="close input-close" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="form-group">
+						<label th:text="#{price}"></label>
+						<div class="input-group" data-trigger="focus"
+							data-toggle="popover" th:attr="data-content=#{numberOnly}">
+							<input type="text" class="form-control"
+								th:placeholder="#{required}" v-model="price" /><span
+								class="input-group-addon" id="basic-addon1">€</span>
+						</div>
+
+
+					</div>
+					<div class="form-group">
+						<label th:text="#{content}"></label>
+						<!-- class="ckeditor" -->
+						<textarea class="ckeditor" cols="80" name="description" rows="12" v-model="description"></textarea>
+
+					</div>
+
+
+				</div>
+			</form>
+		</div>
+
+
+		<div class="right_col col-md-6" role="main">
+			<div class="">
+
+				<div class="clearfix"></div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<br> <label th:text="#{uploadPics}"></label>
+
+						<form th:action="@{/secondHand/add}" method="post"
+							class="dropzone form-control" id="my-awesome-dropzone"
+							enctype="multipart/form-data">
+							<input type="hidden" id="title" name="title" /> <input
+								type="hidden" id="price" name="price" /> <input type="hidden"
+								id="description" name="description" />
+						</form>
+						<input type="hidden" th:value="#{uploadFileMsg}"
+							id="uploadFileMsg"> <input type="hidden"
+							th:value="#{removeFile}" id="removeFile">
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+</div>
+<!-- Dropzone.js -->
+<script th:src="@{/plugins/dropzone/dropzone.js}"></script>
+
+<!-- Custom Theme Scripts -->
+<script type="text/javascript" th:src="@{/js/announce/announce.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/announce/secondHand/add.js}"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+<script type="text/javascript"
+	th:src="@{/js/plugins/ckeditor/ckeditor.js}"></script>
+
+
