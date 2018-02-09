@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="common/head"></head>
+
+<!-- NProgress -->
+<link th:href="@{/plugins/dropzone/dropzone.css}" rel="stylesheet">
+
+<style type="text/css">
+.input-error {
+	border: 1px solid rgba(255, 0, 0, 0.48);
+}
+
+.py-5.gradient-overlay {
+	background-image: url('/img/index.jpg');
+}
+
+.card-header.bg-primary.text-white.text-center.secondHand {
+	background-color: rgba(255, 138, 0, 0.79) !important;
+}
+
+.card-header.bg-primary.text-white.text-center.question {
+	background-color: rgb(84, 228, 87) !important;
+}
+
+input.form-control.mr-2 {
+	width: initial;
+}
+</style>
+<body>
+	<nav th:replace="common/navbar"></nav>
+
+	<div class="bg-light text-dark py-3">
+		<div class="container p-2 ml-auto">
+
+
+
+
+
+			<style>
+.dropzone {
+	border: 1px solid rgb(211, 211, 212) !important;
+}
+
+#my-awesome-dropzone>div>span {
+	color: rgba(128, 128, 128, 0.5);
+}
+
+button.input-close {
+	position: relative;
+	bottom: 32px;
+	right: 7px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#masonry {
+  column-count: 2;
+  column-gap: 1em;
+}
+
+@media(min-width: 30em) {
+  #masonry {
+    column-count: 3;
+    column-gap: 1em;
+  }
+}
+
+.item {
+  background-color: none;
+  display: inline-block;
+  margin: 0 0 1em 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.item img {
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+  margin-bottom: -4px;
+  
+  /*idk why but this fix stuff*/
+}
+
+.item.active {
+  animation-name: active-in;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
+.item.active:before {
+  content: "+";
+  transform: rotate(45deg);
+  font-size: 48px;
+  color: white;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color:rgba(0,0,0,0.85);
+  border-radius: 50%;
+  width:48px;
+  height:48px;
+  text-align:center;
+  line-height:48px;
+  z-index:12;
+}
+
+.item.active img {
+  animation-name: active-in-img;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
+@keyframes active-in {
+  0% {
+    opacity:1;
+    background-color:white;
+  }
+  
+  50% {
+    opacity:0;
+    background-color:rgba(0,0,0,0.90);
+  }
+  
+  100% {
+    opacity: 1;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(0,0,0,0.90);
+  }
+}
+
+@keyframes active-in-img {
+  0% {
+    opacity:1;
+    transform:translate(0%, 0%);
+    top: 0;
+    left: 0;
+    max-width: 100%;
+  }
+  49% {
+    opacity:0;
+    transform: translate(0%, -50%);
+  }
+  50% {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+  }
+  100% {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  width: auto;
+  max-height: 95vh;
+  opacity:1;
+  }
+}
+</style>
+			<div id="add">
+				<div class="row">
+					<div class="col-md-12">
+						<span class="lead w-25" th:text="#{announce}+'/'+#{detail}"></span>
+						<button type="submit" id="addBtn" class="btn btn-primary"
+							style="float: right" th:text="#{edit}"></button>
+						<span style="float: right">&nbsp;&nbsp;</span>
+						<button type="submit" class="btn btn-primary" style="float: right"
+							th:onclick="'returnLastURL(\''+${lasturl}+'\')'"
+							th:text="#{return}"></button>
+
+					</div>
+				</div>
+				<hr>
+
+				<div class="row">
+
+					<div class="col-md-6">
+						<form role="form" name="form" id="tempsForm">
+							<div class="card-body" id="addSecondHand">
+
+								<div class="form-group">
+									<label th:text="#{title}"></label> <input id="title_"
+										type="text" class="form-control" v-model="title"
+										th:value="${announce.title}" />
+									<button type="button" class="close input-close"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="form-group">
+									<label th:text="#{price}"></label>
+									<div class="input-group" data-trigger="focus"
+										data-toggle="popover" th:attr="data-content=#{numberOnly}">
+										<input id="price_" type="text" class="form-control"
+											v-model="price" th:value="${announce.price}" /><span
+											class="input-group-addon" id="basic-addon1">€</span>
+									</div>
+
+								</div>
+								<div class="form-group">
+									<label th:text="#{content}"></label>
+									<!-- class="ckeditor" -->
+									<textarea id="description_" class="ckeditor" cols="80"
+										name="description" rows="12" v-model="description"
+										th:utext="${announce.description}"></textarea>
+
+								</div>
+
+
+							</div>
+						</form>
+					</div>
+
+
+					<div class="right_col col-md-6" role="main">
+						<div class="">
+
+							<div class="clearfix"></div>
+
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<br> <label th:text="#{uploadPics}"></label>
+
+									<div id="masonry" >
+										<div class="item">
+											<img src="http://placehold.it/1200x1200" alt="" />
+										</div>
+										<div class="item">
+											<img src="http://placehold.it/300x200" alt="" />
+										</div>
+										<div class="item">
+											<img src="http://placehold.it/300x300" alt="" />
+										</div>
+										<div class="item">
+											<img src="http://placehold.it/200x200" alt="" />
+										</div>
+										<div class="item">
+											<img src="http://placehold.it/300x250" alt="" />
+										</div>
+										<div class="item">
+											<img src="http://placehold.it/200x320" alt="" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+
+			</div>
+
+
+		</div>
+	</div>
+	<!-- Dropzone.js -->
+	<script th:src="@{/plugins/dropzone/dropzone.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/plugins/ckeditor/ckeditor.js}"></script>
+	<div th:replace="common/foot"></div>
+
+	<script th:src="@{/plugins/dropzone/dropzone.js}"></script>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
+		
+	<script>
+	$('.item').click(function() {
+		  $(this).toggleClass('active');
+		});
+	</script>
+		
+
+
+</body>
+
+</html>

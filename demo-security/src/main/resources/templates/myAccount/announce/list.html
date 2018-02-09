@@ -84,7 +84,7 @@
 								@mousedown="toDeleteF(announce.id)">Delete</a>/ <a
 								v-bind:href="'javascript:deleteUser('+announce.id+')'"
 								th:text="#{edit}">Modife</a>/ <a
-								v-bind:href="'javascript:deleteUser('+announce.id+')'"
+								v-bind:href="'/announce/showDetailsById?id='+announce.id"
 								th:text="#{detail}">Detail</a></td>
 						</tr>
 

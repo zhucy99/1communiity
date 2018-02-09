@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,13 @@ public class AnnounceController {
 	public @ResponseBody Announce findById(@RequestParam(value = "id") Long id) {
 		Announce announces = announceService.findById(id);
 		return announces;
+	}
+	
+	@RequestMapping(value = "/showDetailsById", method = { RequestMethod.GET })
+	public String showDetailsById(@RequestParam(value = "id") Long id, Model model) {
+		Announce announce = announceService.findById(id);
+		model.addAttribute("announce", announce);
+		return "myAccount/announce/detail";
 	}
 	
 	@RequestMapping(value = "/delete", method = { RequestMethod.GET })

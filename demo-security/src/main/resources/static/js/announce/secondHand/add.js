@@ -2,7 +2,7 @@ function addSecondHand() {
 	console.log(add.price);
 	$("#title").val(add.title);
 	$("#price").val(add.price);
-	$("#description").val(CKEDITOR.instances['description'].getData());
+	$("#description").val(CKEDITOR.instances['description_'].getData());
 
 }
 
@@ -17,7 +17,7 @@ var add = new Vue(
 			computed : {
 				isValided : function() {
 					if (this.title == '' || this.price == ''
-							|| CKEDITOR.instances['description'].getData() == '') {
+							|| CKEDITOR.instances['description_'].getData() == '') {
 						return false;
 					} else {
 						return true;
